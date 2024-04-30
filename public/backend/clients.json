@@ -1,0 +1,44 @@
+[
+    {
+        "id": 1,
+        "type_id": 1,
+        "first_name": "Juliette",
+        "last_name": "BARLIER",
+        "contact_name": null,
+        "address": "10 impasse le Maguelone",
+        "postal_code": "30700",
+        "city": "Arpaillargues",
+        "phone_number": "0620521738",
+        "email": "bruno.barlier@gmail.com",
+        "created_at": null,
+        "updated_at": null
+    },
+    {
+        "id": 2,
+        "type_id": 2,
+        "first_name": "John",
+        "last_name": "Doe",
+        "contact_name": "Jane Doe",
+        "address": "123 Main St",
+        "postal_code": "12345",
+        "city": "Anytown",
+        "phone_number": "555-123-4567",
+        "email": "john.doe@example.com",
+        "created_at": null,
+        "updated_at": null
+    },
+    {
+        "id": 3,
+        "type_id": 1,
+        "first_name": "Alice",
+        "last_name": "Smith",
+        "contact_name": null,
+        "address": "456 Elm St",
+        "postal_code": "54321",
+        "city": "Othercity",
+        "phone_number": "555-987-6543",
+        "email": "alice.smith@example.com",
+        "created_at": null,
+        "updated_at": null
+    }
+]
