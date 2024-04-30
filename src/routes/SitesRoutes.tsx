@@ -1,12 +1,10 @@
-import React from 'react';
 import Route from '../interface/routes';
 
-import SitesList from '../pages/SitesList';
-
+import SitesListPage from '../pages/SitesListPage';
 const sitesRoutes: Route[] = [
   {
     path: 'sites',
-    element: <SitesList />,
+    element: <SitesListPage />,
     linkText: 'Lister Sites',
   },
 ];

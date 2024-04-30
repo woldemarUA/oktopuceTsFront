@@ -1,7 +1,6 @@
-import React from 'react';
 import Route from '../interface/routes';
 
-import ClientList from '../pages/ClientList';
+import ClientList from '../pages/ClientListPage';
 
 const clientRoutes: Route[] = [
   {

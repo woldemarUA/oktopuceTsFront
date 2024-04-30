@@ -69,19 +69,16 @@ const NavBar: React.FC = () => {
             </div>
           </div>
         </div>
-        <div className={styles.profileButton}>
-          {/* Profile-related buttons and dropdown */}
-        </div>
-      </div>
-      {isMobileMenuOpen && (
-        <div
-          className='sm:hidden'
-          id='mobile-menu'>
-          <div className='space-y-1 px-2 pb-3 pt-2'>
-            <MenuItems isActive={isActive} />
+        {isMobileMenuOpen && (
+          <div
+            className='sm:hidden'
+            id='mobile-menu'>
+            <div className='space-y-1 px-2 pb-3 pt-2'>
+              <MenuItems isActive={isActive} />
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </nav>
   );
 };
