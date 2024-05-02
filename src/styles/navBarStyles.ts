@@ -5,7 +5,7 @@ const styles = {
     'mx-auto max-w-7xl px-2 sm:px-6 lg:px-8 relative flex h-16 items-center justify-between',
   mobileMenuContainer: 'absolute inset-y-0 left-0 flex items-center sm:hidden',
   mobileMenuButton:
-    'relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white',
+    'relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-teal-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white',
   svgBlock: 'block h-6 w-6',
   svgHidden: 'hidden h-6 w-6',
   centerFlex:
@@ -27,7 +27,7 @@ const styles = {
     'absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none',
   userProfile: 'block px-4 py-2 text-sm text-gray-700',
   hangingMenu:
-    'absolute z-10 mt-2 w-48 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none',
+    'absolute z-10 mt-2 w-48 rounded-md shadow-lg bg-teal-600 border border-teal-400  p-1 ring-1 ring-black ring-opacity-5 focus:outline-none',
 };
 
 export default styles;

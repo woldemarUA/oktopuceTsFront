@@ -2,12 +2,12 @@
 
 import SitesInterface from '../../interface/sitesInterface';
 
-import { Accordion } from '../Accodrion';
+import { Accordion } from '../Accordion';
 
 import useAccordion from '../../hooks/useAccordion';
 
 import styles from '../../styles/listStyles';
-
+import globalStyles from '../../styles/globalStyles';
 interface Props {
   data: SitesInterface[];
   title: string;
@@ -15,10 +15,10 @@ interface Props {
 
 const SitesList: React.FC<Props> = ({ data, title }) => {
   const { openAccordion, toggleAccordion } = useAccordion();
-  console.log(data);
+
   return (
     <>
-      <h2 className={styles.listHeader}> {title} </h2>
+      <h2 className={globalStyles.header}> {title} </h2>
       <ul
         role='list'
         className='divide-y divide-gray-100 mt-2'>

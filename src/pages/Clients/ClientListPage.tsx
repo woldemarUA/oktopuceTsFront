@@ -1,6 +1,6 @@
-import { useClients } from '../context/ClientsProvider';
+import { useClients } from '../../context/ClientsProvider';
 
-import ClientsList from '../components/listComps/ClientsList';
+import ClientsList from '../../components/listComps/ClientsList';
 
 const ClientList: React.FC = () => {
   const { clients } = useClients();

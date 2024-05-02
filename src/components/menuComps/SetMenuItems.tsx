@@ -38,7 +38,7 @@ const SetMenuItems: React.FC<SetMenuItemsProps> = ({
         </svg> */}
       </button>
 
-      <div className={styles.hangingMenu}>
+      <div className={!isOpen ? 'hidden' : styles.hangingMenu}>
         {isOpen &&
           routes.map((route) => {
             return (

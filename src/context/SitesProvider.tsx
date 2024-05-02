@@ -8,13 +8,15 @@ import {
 
 import SitesInterface from '../interface/sitesInterface';
 
-import { fetchSites } from '../actions/sitesAPI';
-import { error } from 'console';
+import { SitesFormValues } from '../components/forms/config/sitesFormConfig';
+
+import { fetchSites, addSite } from '../actions/sitesAPI';
 
 interface SitesContextType {
   sites: SitesInterface[];
   site: SitesInterface | null;
   getSites: () => Promise<void>;
+  handleAddSite: (clientData: SitesFormValues) => Promise<{ msg: string }>;
   error: Error | null;
 }
 
@@ -22,6 +24,11 @@ const DefaultContextValue: SitesContextType = {
   sites: [],
   site: null,
   getSites: async () => {},
+  handleAddSite: async () => {
+    return {
+      msg: 'message',
+    };
+  },
   error: null,
 };
 
@@ -35,6 +42,7 @@ const SitesProvider: React.FC<SitesProviderProps> = ({ children }) => {
   const [sites, setSites] = useState<SitesInterface[]>([]);
   const [site, setSite] = useState<SitesInterface | null>(null);
   const [error, setError] = useState<Error | null>(null);
+  const [fetchFlag, setFetchFlag] = useState(false);
 
   const getSites = async () => {
     try {
@@ -48,14 +56,30 @@ const SitesProvider: React.FC<SitesProviderProps> = ({ children }) => {
           ? err
           : new Error('Échec de la récupération des sites')
       );
+    } finally {
+      setFetchFlag(false);
+    }
+  };
+
+  const handleAddSite = async (
+    siteData: SitesFormValues
+  ): Promise<{ msg: string }> => {
+    try {
+      const serverResp = await addSite(siteData);
+      setFetchFlag(true);
+      return serverResp;
+    } catch (error) {
+      console.error(error);
+      throw error;
     }
   };
 
   useEffect(() => {
     getSites();
-  }, []);
+  }, [fetchFlag]);
   return (
-    <SitesContext.Provider value={{ sites, site, getSites, error }}>
+    <SitesContext.Provider
+      value={{ sites, site, getSites, handleAddSite, error }}>
       {children}
     </SitesContext.Provider>
   );

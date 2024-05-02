@@ -1,9 +1,10 @@
 import ClientsInterface from '../../interface/clientsInterface';
 
-import { Accordion } from '../Accodrion';
+import { Accordion } from '../Accordion';
 import useAccordion from '../../hooks/useAccordion';
 
 import styles from '../../styles/listStyles';
+import globalStyles from '../../styles/globalStyles';
 
 interface Props {
   data: ClientsInterface[];
@@ -15,7 +16,7 @@ const ClientsList: React.FC<Props> = ({ data, title }) => {
 
   return (
     <>
-      <h2 className={styles.listHeader}> {title} </h2>
+      <h2 className={globalStyles.header}> {title} </h2>
       <ul
         role='list'
         className='divide-y divide-gray-100 mt-2'>
@@ -38,7 +39,9 @@ const ClientsList: React.FC<Props> = ({ data, title }) => {
               {/* <div className={styles.userInfoContainer}> */}
 
               <Accordion
-                title={`${item.first_name} ${item.last_name}`}
+                title={`${item.first_name} ${
+                  item.last_name || item.contact_name
+                }`}
                 toggleAccordion={toggleAccordion}
                 id={item.id}
                 isOpen={openAccordion === item.id}

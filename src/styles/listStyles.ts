@@ -1,5 +1,4 @@
 const styles = {
-  listHeader: 'text-4xl font-bold text-center text-gray-100 mt-2',
   listItem: 'flex justify-between gap-x-6 py-5 px-2  border-b border-teal-600',
   userInfoContainer: 'flex min-w-0 gap-x-4',
   userImage: 'h-12 w-12 flex-none rounded-full bg-gray-50',

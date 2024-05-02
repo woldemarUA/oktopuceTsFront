@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import NavBar from './pages/NavBar';
 
@@ -10,6 +11,9 @@ import sitesRoutes from './routes/SitesRoutes';
 import globalStyles from './styles/globalStyles';
 
 const App: React.FC = () => {
+  useEffect(() => {
+    document.title = import.meta.env.VITE_APP_TITLE;
+  }, []);
   return (
     <Router>
       <AppContextProvider>
