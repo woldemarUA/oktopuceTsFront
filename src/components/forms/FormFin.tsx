@@ -12,7 +12,7 @@ import * as Yup from 'yup'; // Importation de Yup pour la validation des schéma
 import { styles } from '../../styles/formStyles';
 import globalStyles from '../../styles/globalStyles';
 
-import Button from '../Button';
+import Button from '../ui/Button';
 
 // Définition de la structure pour les options dans les champs de sélection.
 interface Option {

@@ -1,13 +1,14 @@
 import axios from 'axios';
 
 import SitesInterface from '../interface/sitesInterface';
-import { SitesFormValues } from '../components/forms/config/sitesFormConfig';
+// import { SitesFormValues } from '../components/forms/config/sitesFormConfig';
 
 const BASE_PATH: string = import.meta.env.VITE_API_PATH;
 
-export const addSite = async (siteData: SitesFormValues) => {
+export const addSite = async (siteData: SitesInterface) => {
   try {
     await axios.post(`${BASE_PATH}/sites`, siteData);
+
     return { msg: 'Site  était ajouté avec succès' };
   } catch (err) {
     console.error(err);

@@ -9,9 +9,10 @@ export interface SitesFormValues {
   city: string;
   phone_number: string;
   email: string;
-  maintenance_check?: string;
+  maintenance_provider: string;
   main_nom?: string;
   main_telephone?: string;
+  main_mail?: string;
 }
 
 export const SitesFormConfig = {
@@ -80,7 +81,7 @@ export const SitesFormConfig = {
       .max(255, 'L’email doit contenir moins de 256 caractères'),
     type: 'email',
   },
-  maintenance_check: {
+  maintenance_provider: {
     label: 'Prestataire maintenance',
     initialValue: '1',
     type: 'select',
@@ -94,24 +95,25 @@ export const SitesFormConfig = {
     label: 'Nom',
     initialValue: '',
     type: 'text',
-    validationSchema: Yup.string().when('maintenance_check', {
-      is: (maintenance_check: { value: string; label: string }) =>
-        maintenance_check.value === '2',
+    validationSchema: Yup.string().when('maintenance_provider ', {
+      is: (maintenance_provider: { value: string; label: string }) =>
+        maintenance_provider.value === '2',
       then: () =>
         Yup.string()
           .required('Le nom est requis')
           .max(255, 'Le nom doit contenir moins de 256 caractères'),
       otherwise: () => Yup.string().notRequired(),
     }),
-    visibleWhen: (values: SitesFormValues) => values.maintenance_check === '2',
+    visibleWhen: (values: SitesFormValues) =>
+      values.maintenance_provider === '2',
   },
   main_telephone: {
     label: 'Téléphone',
     initialValue: '',
     type: 'text',
-    validationSchema: Yup.string().when('maintenance_check', {
-      is: (maintenance_check: { value: string; label: string }) =>
-        maintenance_check.value === '2',
+    validationSchema: Yup.string().when('maintenance_provider ', {
+      is: (maintenance_provider: { value: string; label: string }) =>
+        maintenance_provider.value === '2',
       then: () =>
         Yup.string()
           .required('Le numéro de téléphone est requis')
@@ -125,15 +127,16 @@ export const SitesFormConfig = {
           ),
       otherwise: () => Yup.string().notRequired(),
     }),
-    visibleWhen: (values: SitesFormValues) => values.maintenance_check === '2',
+    visibleWhen: (values: SitesFormValues) =>
+      values.maintenance_provider === '2',
   },
   main_mail: {
     label: 'Email',
     initialValue: '',
     type: 'email',
-    validationSchema: Yup.string().when('maintenance_check', {
-      is: (maintenance_check: { value: string; label: string }) =>
-        maintenance_check.value === '2',
+    validationSchema: Yup.string().when('maintenance_provider ', {
+      is: (maintenance_provider: { value: string; label: string }) =>
+        maintenance_provider.value === '2',
       then: () =>
         Yup.string()
           .required('L’email est requis')
@@ -141,7 +144,8 @@ export const SitesFormConfig = {
           .max(255, 'L’email doit contenir moins de 256 caractères'),
       otherwise: () => Yup.string().notRequired(),
     }),
-    visibleWhen: (values: SitesFormValues) => values.maintenance_check === '2',
+    visibleWhen: (values: SitesFormValues) =>
+      values.maintenance_provider === '2',
   },
 };
 

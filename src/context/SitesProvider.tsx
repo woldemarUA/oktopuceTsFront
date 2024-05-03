@@ -65,7 +65,24 @@ const SitesProvider: React.FC<SitesProviderProps> = ({ children }) => {
     siteData: SitesFormValues
   ): Promise<{ msg: string }> => {
     try {
-      const serverResp = await addSite(siteData);
+      const { main_mail, main_nom, main_telephone } = siteData;
+      const siteUpload: SitesInterface = {
+        client_id: parseInt(siteData.client_id, 10),
+        name: siteData.name,
+        address: siteData.address,
+        postal_code: siteData.postal_code,
+        city: siteData.city,
+        phone_number: siteData.phone_number,
+        email: siteData.email,
+        has_maintenance_provider:
+          siteData.maintenance_provider === '1' ? false : true,
+        maintenance_provider:
+          siteData.maintenance_provider === '1'
+            ? null
+            : { main_mail, main_nom, main_telephone },
+      };
+
+      const serverResp = await addSite(siteUpload);
       setFetchFlag(true);
       return serverResp;
     } catch (error) {
