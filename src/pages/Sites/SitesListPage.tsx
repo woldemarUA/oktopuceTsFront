@@ -1,13 +1,14 @@
-import SitesList from '../../components/listComps/SitesList';
+import ListItems from '../../components/list/ListItems';
 import { useSites } from '../../context/SitesProvider';
 
 const SitesListPage: React.FC = () => {
   const { sites } = useSites();
 
   return (
-    <SitesList
-      data={sites}
+    <ListItems
+      items={sites}
       title='Lister Sites'
+      type='sites'
     />
   );
 };

@@ -7,6 +7,7 @@ import Intro from './pages/Intro';
 
 import clientRoutes from './routes/ClientRoutes';
 import sitesRoutes from './routes/SitesRoutes';
+import interventionsRoutes from './routes/InterventionsRoutes';
 
 import globalStyles from './styles/globalStyles';
 
@@ -35,6 +36,14 @@ const App: React.FC = () => {
                 />
               ))}
               {sitesRoutes.map((route) => (
+                <Route
+                  key={route.path}
+                  element={route.element}
+                  path={route.path}
+                />
+              ))}
+
+              {interventionsRoutes.map((route) => (
                 <Route
                   key={route.path}
                   element={route.element}

@@ -20,10 +20,7 @@ export const Accordion: React.FC<AccordionProps> = ({
     <>
       <button onClick={() => toggleAccordion(id)}>{title}</button>
 
-      <div className={styles.listItem}>
-        {/* <div className={styles.userInfoContainer}> */}
-        {isOpen && <>{children}</>}
-      </div>
+      <div className={styles.listItem}>{isOpen && <>{children}</>}</div>
     </>
   );
 };

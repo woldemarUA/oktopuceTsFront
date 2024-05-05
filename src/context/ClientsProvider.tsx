@@ -7,7 +7,7 @@ import {
 } from 'react';
 
 import ClientsInterface from '../interface/clientsInterface';
-import { ClientFormValues } from '../components/forms/config/clientFormConfig';
+import { ClientFormValues } from '../interface/clientsInterface';
 
 import { fetchClients, addClient } from '../actions/clientsAPI';
 

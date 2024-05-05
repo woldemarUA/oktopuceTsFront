@@ -8,7 +8,7 @@ import {
 
 import SitesInterface from '../interface/sitesInterface';
 
-import { SitesFormValues } from '../components/forms/config/sitesFormConfig';
+import { SitesFormValues } from '../interface/sitesInterface';
 
 import { fetchSites, addSite } from '../actions/sitesAPI';
 

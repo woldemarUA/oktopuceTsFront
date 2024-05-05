@@ -1,0 +1,852 @@
+[
+    {
+        "type": "Mise en Service",
+        "questions": [
+            {
+                "question": "Pose de l’unité",
+                "questionType": "checkbox",
+                "choices": [],
+                "required": false
+            },
+            {
+                "question": "Réalisation des raccords électriques",
+                "questionType": "checkbox",
+                "choices": [],
+                "required": false
+            },
+            {
+                "question": "Réalisation des raccords frigorifiques",
+                "questionType": "checkbox",
+                "choices": [],
+                "required": false
+            },
+            {
+                "question": "Réalisation de l’évacuation des condensats",
+                "questionType": "checkbox",
+                "choices": [],
+                "required": false
+            },
+            {
+                "question": "Contrôle étanchéité des réseaux",
+                "questionType": "checkbox",
+                "choices": [],
+                "required": false
+            },
+            {
+                "question": "Essais de fonctionnement",
+                "questionType": "checkbox",
+                "choices": [],
+                "required": false
+            },
+            {
+                "question": "Information complementaire",
+                "questionType": "text",
+                "choices": [],
+                "required": false
+            }
+        ],
+        "equipmentTypes": [
+            "/api/equipment_types/181",
+            "/api/equipment_types/182",
+            "/api/equipment_types/183",
+            "/api/equipment_types/185",
+            "/api/equipment_types/186"
+        ]
+    },
+    {
+        "type": "Mise en Service",
+        "questions": [
+            {
+                "question": "Pose de l’unité",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Réalisation des percements entrée/sortie d’air",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Réalisation des raccords électriques",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Réalisation de l’évacuation des condensats",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Essais de fonctionnement",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Information complementaire",
+                "questionType": "text",
+                "required": false
+            }
+        ],
+        "equipmentTypes": [
+            "/api/equipment_types/184"
+        ]
+    },
+    {
+        "type": "Mise en Service",
+        "questions": [
+            {
+                "question": "Pose de l’unité",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Réalisation des raccords électriques",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Réalisation des raccords frigorifiques",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Réalisation de l’évacuation des condensats",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Tirage au vide",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Contrôle étanchéité des réseaux",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Essais de fonctionnement",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Information complementaire",
+                "questionType": "text",
+                "required": false
+            }
+        ],
+        "equipmentTypes": [
+            "/api/equipment_types/187",
+            "/api/equipment_types/188",
+            "/api/equipment_types/189"
+        ]
+    },
+    {
+        "type": "Entretien",
+        "questions": [
+            {
+                "question": "Nettoyage des filtres",
+                "questionType": "checkbox",
+                "choices": [],
+                "required": false
+            },
+            {
+                "question": "Désinfection échangeur",
+                "questionType": "checkbox",
+                "choices": [],
+                "required": true
+            },
+            {
+                "question": "Nettoyage de la turbine",
+                "questionType": "checkbox",
+                "choices": [],
+                "required": false
+            },
+            {
+                "question": "Contrôle évacuation des condensats",
+                "questionType": "checkbox",
+                "choices": [],
+                "required": false
+            },
+            {
+                "question": "Contrôle des serrages électriques",
+                "questionType": "checkbox",
+                "choices": [],
+                "required": false
+            },
+            {
+                "question": "Contrôle étanchéité des réseaux",
+                "questionType": "checkbox",
+                "choices": [],
+                "required": false
+            },
+            {
+                "question": "Contrôle des températures de soufflage",
+                "questionType": "checkbox",
+                "choices": [],
+                "required": false
+            },
+            {
+                "question": "Informations complémentaires",
+                "questionType": "text",
+                "choices": [],
+                "required": false
+            },
+            {
+                "question": "Fonctionnement conforme",
+                "questionType": "checkbox",
+                "choices": [],
+                "required": false
+            },
+            {
+                "question": "Serrage électrique",
+                "questionType": "multiple",
+                "choices": {
+                    "1": "OUI",
+                    "2": "NON"
+                },
+                "required": true
+            },
+            {
+                "question": "Test de la télécommande",
+                "questionType": "multiple",
+                "choices": {
+                    "1": "OUI",
+                    "2": "NON",
+                    "3": "JE SAIS PAS"
+                },
+                "required": false
+            },
+            {
+                "question": "Etat de l'installation",
+                "questionType": "select",
+                "choices": {
+                    "1": "TRES BON",
+                    "2": "MOYEN",
+                    "3": "MAUVAIS"
+                },
+                "required": false
+            }
+        ],
+        "equipmentTypes": [
+            "/api/equipment_types/181",
+            "/api/equipment_types/182",
+            "/api/equipment_types/184",
+            "/api/equipment_types/185",
+            "/api/equipment_types/186"
+        ]
+    },
+    {
+        "type": "Entretien",
+        "questions": [
+            {
+                "question": "Netoyage ou remplacement des filtres",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Désinfection échangeur",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Désinfection réseau de gaines",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Netoyage de la turbine",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Contrôle évacuation des condensats",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Contrôle des serrages électriques",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Contrôle étanchéité des réseaux",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Contrôle des températures de soufflage",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Contrôle de la régulation",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Information complementaire",
+                "questionType": "text",
+                "required": false
+            }
+        ],
+        "equipmentTypes": [
+            "/api/equipment_types/183"
+        ]
+    },
+    {
+        "type": "Entretien",
+        "questions": [
+            {
+                "question": "Nettoyage échangeur",
+                "questionType": "checkbox",
+                "choices": [],
+                "required": false
+            },
+            {
+                "question": "Contrôle des serrages électriques",
+                "questionType": "checkbox",
+                "choices": [],
+                "required": false
+            },
+            {
+                "question": "Contrôle étanchéité des réseaux",
+                "questionType": "checkbox",
+                "choices": [],
+                "required": false
+            },
+            {
+                "question": "Contrôle des pressions",
+                "questionType": "checkbox",
+                "choices": [],
+                "required": false
+            },
+            {
+                "question": "Information complementaire",
+                "questionType": "text",
+                "choices": [],
+                "required": false
+            }
+        ],
+        "equipmentTypes": [
+            "/api/equipment_types/187",
+            "/api/equipment_types/188",
+            "/api/equipment_types/189"
+        ]
+    },
+    {
+        "type": "Dépannage",
+        "questions": [
+            {
+                "question": "Description du problème",
+                "questionType": "text",
+                "choices": [],
+                "required": false
+            },
+            {
+                "question": "Code défaut",
+                "questionType": "text",
+                "choices": [],
+                "required": false
+            },
+            {
+                "question": "Défaut indiqué",
+                "questionType": "text",
+                "choices": [],
+                "required": false
+            },
+            {
+                "question": "Contact station technique",
+                "questionType": "checkbox",
+                "choices": [],
+                "required": false
+            },
+            {
+                "question": "Numéro de dossier",
+                "questionType": "text",
+                "choices": [],
+                "required": false
+            },
+            {
+                "question": "Description interventions réalisées",
+                "questionType": "text",
+                "choices": [],
+                "required": false
+            },
+            {
+                "question": "Problème corrigé",
+                "questionType": "checkbox",
+                "choices": [],
+                "required": false
+            },
+            {
+                "question": "Nouvelle intervention à prévoir",
+                "questionType": "checkbox",
+                "choices": [],
+                "required": false
+            },
+            {
+                "question": "Information complementaire",
+                "questionType": "text",
+                "choices": [],
+                "required": false
+            }
+        ],
+        "equipmentTypes": [
+            "/api/equipment_types/181",
+            "/api/equipment_types/182",
+            "/api/equipment_types/183",
+            "/api/equipment_types/184",
+            "/api/equipment_types/185",
+            "/api/equipment_types/186",
+            "/api/equipment_types/187",
+            "/api/equipment_types/188",
+            "/api/equipment_types/189"
+        ]
+    },
+    {
+        "type": "Dépose",
+        "questions": [
+            {
+                "question": "Unité intérieure",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Câblage",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Cuivre",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Evacuation des condensats",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Autre",
+                "questionType": "optionalText",
+                "required": false
+            },
+            {
+                "question": "Récupération du fluide dans unité extérieure",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Repose prévue au même emplacement",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Information complementaire",
+                "questionType": "text",
+                "required": false
+            }
+        ],
+        "equipmentTypes": [
+            "/api/equipment_types/181",
+            "/api/equipment_types/182",
+            "/api/equipment_types/183",
+            "/api/equipment_types/185",
+            "/api/equipment_types/186"
+        ]
+    },
+    {
+        "type": "Dépose",
+        "questions": [
+            {
+                "question": "Unité intérieure",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Câblage",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Evacuation des condensats",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Autre",
+                "questionType": "optionalText",
+                "required": false
+            },
+            {
+                "question": "Récupération du fluide dans unité extérieure",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Repose prévue au même emplacement",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Information complementaire",
+                "questionType": "text",
+                "required": false
+            }
+        ],
+        "equipmentTypes": [
+            "/api/equipment_types/184"
+        ]
+    },
+    {
+        "type": "Dépose",
+        "questions": [
+            {
+                "question": "Unité extérieure",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Câblage",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Cuivre",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Evacuation d’eau",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Autre",
+                "questionType": "optionalText",
+                "required": false
+            },
+            {
+                "question": "Récupération du fluide dans unité extérieure",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Repose prévue au même emplacement",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Informations complémentaires",
+                "questionType": "text",
+                "required": false
+            },
+            {
+                "question": "Information complementaire",
+                "questionType": "text",
+                "required": false
+            }
+        ],
+        "equipmentTypes": [
+            "/api/equipment_types/187",
+            "/api/equipment_types/188",
+            "/api/equipment_types/189"
+        ]
+    },
+    {
+        "type": "Repose",
+        "questions": [
+            {
+                "question": "Unité intérieure",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Câblage",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Cuivre",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Evacuation des condensats",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Autre",
+                "questionType": "optionalText",
+                "required": false
+            },
+            {
+                "question": "Réalisation mise en service",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Si OUI (réalisation mise en service) alors : Essais",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Information complementaire",
+                "questionType": "text",
+                "required": false
+            }
+        ],
+        "equipmentTypes": [
+            "/api/equipment_types/181",
+            "/api/equipment_types/182",
+            "/api/equipment_types/183",
+            "/api/equipment_types/185",
+            "/api/equipment_types/186"
+        ]
+    },
+    {
+        "type": "Repose",
+        "questions": [
+            {
+                "question": "Unité intérieure",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Câblage",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Evacuation des condensats",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Autre",
+                "questionType": "optionalText",
+                "required": false
+            },
+            {
+                "question": "Réalisation mise en service",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Si OUI (réalisation mise en service) alors : Essais",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Information complementaire",
+                "questionType": "text",
+                "required": false
+            }
+        ],
+        "equipmentTypes": [
+            "/api/equipment_types/184"
+        ]
+    },
+    {
+        "type": "Repose",
+        "questions": [
+            {
+                "question": "Unité extérieure",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Câblage",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Cuivre",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Evacuation d’eau",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Autre",
+                "questionType": "optionalText",
+                "required": false
+            },
+            {
+                "question": "Tirage au vide, Réalisation mise en service",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Contrôle étanchéité des réseaux",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Ouverture des vannes",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Essais",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Information complementaire",
+                "questionType": "text",
+                "required": false
+            }
+        ],
+        "equipmentTypes": [
+            "/api/equipment_types/187",
+            "/api/equipment_types/188",
+            "/api/equipment_types/189"
+        ]
+    },
+    {
+        "type": "Dépose Définitive",
+        "questions": [
+            {
+                "question": "Unité intérieure",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Câblage",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Cuivre",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Evacuation des condensats",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Autre",
+                "questionType": "optionalText",
+                "required": false
+            },
+            {
+                "question": "Installation nouveau appareil",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Information complementaire",
+                "questionType": "text",
+                "required": false
+            }
+        ],
+        "equipmentTypes": [
+            "/api/equipment_types/181",
+            "/api/equipment_types/182",
+            "/api/equipment_types/183",
+            "/api/equipment_types/185",
+            "/api/equipment_types/186"
+        ]
+    },
+    {
+        "type": "Dépose Définitive",
+        "questions": [
+            {
+                "question": "Unité intérieure",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Câblage",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Cuivre",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Evacuation des condensats",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Autre",
+                "questionType": "optionalText",
+                "required": false
+            },
+            {
+                "question": "Installation nouveau appareil",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Information complementaire",
+                "questionType": "text",
+                "required": false
+            }
+        ],
+        "equipmentTypes": [
+            "/api/equipment_types/184"
+        ]
+    },
+    {
+        "type": "Dépose Définitive",
+        "questions": [
+            {
+                "question": "Unité extérieure",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Câblage",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Cuivre",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Evacuation d’eau",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Autre",
+                "questionType": "optionalText",
+                "required": false
+            },
+            {
+                "question": "Récupération du fluide dans unité extérieure",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Installation nouveau appareil",
+                "questionType": "checkbox",
+                "required": false
+            },
+            {
+                "question": "Information complementaire",
+                "questionType": "text",
+                "required": false
+            }
+        ],
+        "equipmentTypes": [
+            "/api/equipment_types/187",
+            "/api/equipment_types/188",
+            "/api/equipment_types/189"
+        ]
+    }
+]

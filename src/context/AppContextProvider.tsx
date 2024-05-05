@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 
 import ClientsProvider from './ClientsProvider';
 import SitesProvider from './SitesProvider';
+import InterventionsProvider from './InterventionsProvider';
 
 interface AppProviderProps {
   children: ReactNode;
@@ -10,7 +11,9 @@ interface AppProviderProps {
 const AppContextProvider: React.FC<AppProviderProps> = ({ children }) => {
   return (
     <ClientsProvider>
-      <SitesProvider>{children}</SitesProvider>
+      <SitesProvider>
+        <InterventionsProvider>{children}</InterventionsProvider>
+      </SitesProvider>
     </ClientsProvider>
   );
 };

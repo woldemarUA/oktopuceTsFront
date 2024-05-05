@@ -1,5 +1,5 @@
 export default interface SitesInterface {
-  id?: number;
+  id: number;
   client_id: number;
   name: string;
   address: string;
@@ -14,4 +14,18 @@ export default interface SitesInterface {
     main_telephone: string | undefined;
     main_mail: string | undefined;
   } | null;
+}
+
+export interface SitesFormValues {
+  client_id: string;
+  name: string;
+  address: string;
+  postal_code: string;
+  city: string;
+  phone_number: string;
+  email: string;
+  maintenance_provider: string;
+  main_nom?: string;
+  main_telephone?: string;
+  main_mail?: string;
 }

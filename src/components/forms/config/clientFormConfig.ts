@@ -1,18 +1,6 @@
 // clientsFormConfig.ts
 import * as Yup from 'yup';
-
-export interface ClientFormValues {
-  type_id: string;
-  first_name?: string;
-  last_name?: string;
-  contact_name?: string;
-  address?: string;
-  postal_code?: string;
-  city?: string;
-  phone_number?: string;
-  email?: string;
-  language?: string; // Add all other fields as necessary
-}
+import { ClientFormValues } from '../../../interface/clientsInterface';
 
 export const clientsFormConfig = {
   language: {
@@ -70,7 +58,7 @@ export const clientsFormConfig = {
     visibleWhen: (values: ClientFormValues) => values.type_id === '2',
   },
   address: {
-    label: 'Address',
+    label: 'N° et nom de la rue',
     initialValue: '',
     validationSchema: Yup.string().required('Address est requis').max(200),
     type: 'text',

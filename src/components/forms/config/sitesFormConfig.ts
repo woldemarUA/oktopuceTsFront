@@ -1,19 +1,7 @@
 // clientsFormConfig.ts
 import * as Yup from 'yup';
 
-export interface SitesFormValues {
-  client_id: string;
-  name: string;
-  address: string;
-  postal_code: string;
-  city: string;
-  phone_number: string;
-  email: string;
-  maintenance_provider: string;
-  main_nom?: string;
-  main_telephone?: string;
-  main_mail?: string;
-}
+import { SitesFormValues } from '../../../interface/sitesInterface';
 
 export const SitesFormConfig = {
   client_id: {
@@ -36,7 +24,7 @@ export const SitesFormConfig = {
     type: 'text',
   },
   address: {
-    label: 'Adresse',
+    label: 'N° et nom de la rue',
     initialValue: '',
     validationSchema: Yup.string()
       .required('L’adresse est requise')

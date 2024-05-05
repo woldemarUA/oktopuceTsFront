@@ -6,6 +6,7 @@ import styles from '../../styles/navBarStyles';
 
 import clientRoutes from '../../routes/ClientRoutes';
 import sitesRoutes from '../../routes/SitesRoutes';
+import interventionsRoutes from '../../routes/InterventionsRoutes';
 import SetMenuItems from './SetMenuItems';
 
 interface MenuItemsProps {
@@ -52,6 +53,13 @@ const MenuItems: React.FC<MenuItemsProps> = ({ isActive }) => {
         getActiveClass={getActiveClass}
         isOpen={openMenu === 'Sites'}
         toggleMenu={() => toggleMenu('Sites')}
+      />
+      <SetMenuItems
+        titre='Interventions'
+        routes={interventionsRoutes}
+        getActiveClass={getActiveClass}
+        isOpen={openMenu === 'Interventions'}
+        toggleMenu={() => toggleMenu('Interventions')}
       />
       {/* <a
         href='#'
