@@ -1,5 +1,5 @@
 export default interface SitesInterface {
-  id: number;
+  id?: number;
   client_id: number;
   name: string;
   address: string;

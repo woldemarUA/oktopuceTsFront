@@ -2,16 +2,19 @@ import axios from 'axios';
 
 import InterventionInterface from '../interface/interventionInterface';
 
-const BASE_PATH: string = import.meta.env.VITE_API_PATH;
+// const BASE_PATH: string = import.meta.env.VITE_API_PATH;
+
+const INTERVENTIONS_API_PATH = import.meta.env.VITE_API_INTERVENTIONS_PATH;
 
 export const fetchInterventions = async (): Promise<
   InterventionInterface[]
 > => {
   try {
     const response = await axios.get<InterventionInterface[]>(
-      `${BASE_PATH}/interventions`
+      INTERVENTIONS_API_PATH // `${BASE_PATH}/interventions`
     );
-    return response.data.data;
+
+    return response.data;
   } catch (err) {
     console.error(err);
     if (axios.isAxiosError(err)) {

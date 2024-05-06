@@ -9,6 +9,10 @@ const globalStyles = {
   row: 'grid items-center',
   button:
     'w-full bg-teal-800 hover:bg-teal-600 text-white font-bold py-2 px-4 rounded mt-2',
+  roundedBtn:
+    'rounded-full w-12 h-12 bg-teal-800 hover:bg-teal-600 text-white flex items-center justify-center',
+  roundedBtnActive:
+    'rounded-full w-12 h-12 bg-teal-400  text-white flex items-center justify-center',
 };
 
 export default globalStyles;

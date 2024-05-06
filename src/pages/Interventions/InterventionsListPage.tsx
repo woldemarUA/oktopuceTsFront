@@ -1,5 +1,17 @@
+import ListItems from '../../components/list/ListItems';
+
+import { useInterventions } from '../../context/InterventionsProvider';
+
 const InterventionsListPage: React.FC = () => {
-  return <div>InterventionsListPage</div>;
+  const { interventions } = useInterventions();
+
+  return (
+    <ListItems
+      items={interventions}
+      type='intervention'
+      title='List des Interventions'
+    />
+  );
 };
 
 export default InterventionsListPage;

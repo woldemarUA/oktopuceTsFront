@@ -1,32 +1,3 @@
-// import SitesInterface from '../../interface/sitesInterface';
-// import InterventionInterface from '../../interface/interventionInterface';
-// import ClientsInterface from '../../interface/clientsInterface';
-// import EquipmentInterface from '../../interface/equipmentInterface';
-// interface ItemTypeMap {
-//   sites: SitesInterface;
-//   clients: ClientsInterface;
-//   equipment: EquipmentInterface;
-//   intervention: InterventionInterface;
-// }
-
-// interface ComponentMap {
-//   sites: React.FC<{ item: SitesInterface }>;
-//   clients: React.FC<{ item: ClientsInterface }>;
-//   equipment: React.FC<{ item: EquipmentInterface }>;
-//   intervention: React.FC<{ item: InterventionInterface }>;
-// }
-// const components: ComponentMap = {
-//   sites: SitesListItem,
-//   clients: ClientListItem,
-//   equipment: EquipmentListItem,
-//   intervention: InterventionListItem,
-// };
-
-// interface ListItemsProps<T extends keyof ItemTypeMap> {
-//   type: T;
-//   items: ItemTypeMap[T][];
-// }
-
 import ClientListItem from './ClientListItem';
 import InterventionListItem from './InterventionListItem';
 import SitesListItem from './SitesListItem';
@@ -36,6 +7,7 @@ import { Accordion } from '../Accordion';
 import useAccordion from '../../hooks/useAccordion';
 
 import globalStyles from '../../styles/globalStyles';
+import { getTitle } from '../../utilities/convertors';
 
 const components = {
   sites: SitesListItem,
@@ -75,12 +47,7 @@ const ListItems: React.FC<ListItemsProps> = ({
           return (
             <Accordion
               key={item.id}
-              title={
-                item.name ||
-                `${item.first_name} ${
-                  item.last_name ? item.last_name : item.contact_name
-                }`
-              }
+              title={getTitle(item)}
               id={item.id}
               children={children}
               isOpen={item.id === openAccordion}

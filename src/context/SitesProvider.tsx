@@ -10,12 +10,14 @@ import SitesInterface from '../interface/sitesInterface';
 
 import { SitesFormValues } from '../interface/sitesInterface';
 
-import { fetchSites, addSite } from '../actions/sitesAPI';
+import { fetchSites, addSite, getSiteById } from '../actions/sitesAPI';
+import { number } from 'yup';
 
 interface SitesContextType {
   sites: SitesInterface[];
   site: SitesInterface | null;
   getSites: () => Promise<void>;
+  getSiteById: (id: number) => Promise<SitesInterface | null>;
   handleAddSite: (clientData: SitesFormValues) => Promise<{ msg: string }>;
   error: Error | null;
 }
@@ -24,6 +26,9 @@ const DefaultContextValue: SitesContextType = {
   sites: [],
   site: null,
   getSites: async () => {},
+  getSiteById: async (id: number) => {
+    return null;
+  },
   handleAddSite: async () => {
     return {
       msg: 'message',
@@ -96,7 +101,7 @@ const SitesProvider: React.FC<SitesProviderProps> = ({ children }) => {
   }, [fetchFlag]);
   return (
     <SitesContext.Provider
-      value={{ sites, site, getSites, handleAddSite, error }}>
+      value={{ sites, site, getSites, handleAddSite, getSiteById, error }}>
       {children}
     </SitesContext.Provider>
   );

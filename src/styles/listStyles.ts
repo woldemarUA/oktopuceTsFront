@@ -12,6 +12,7 @@ const styles = {
   statusBadge: 'flex-none rounded-full bg-emerald-500/20 p-1',
   statusIndicator: 'h-1.5 w-1.5 rounded-full bg-emerald-500',
   statusText: 'text-xs leading-5 ',
+  secondaryListItem: 'list-disc list-inside',
 };
 
 export default styles;

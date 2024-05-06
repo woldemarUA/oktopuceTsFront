@@ -1,0 +1,107 @@
+[
+    {
+        "interventiontype": "Mise en Service",
+        "id": "1",
+        "intervention_type_id": "1",
+        "site_id": "2",
+        "intervention_date": "2024-05-01T00:00:00.000Z",
+        "company_name": "Best Chauffage",
+        "technician_name": "Jack Sparrow",
+        "answers": {
+            "completedTasks": [
+                "check filters",
+                "test unit"
+            ],
+            "customerFeedback": "satisfied",
+            "additionalNotes": "Follow-up in 6 months"
+        },
+        "additional_information": null,
+        "created_at": null,
+        "updated_at": null,
+        "name": "Mise en Service"
+    },
+    {
+        "interventiontype": "Entretien",
+        "id": "2",
+        "intervention_type_id": "2",
+        "site_id": "3",
+        "intervention_date": "2024-05-02T00:00:00.000Z",
+        "company_name": "Pro Chauffage Solutions",
+        "technician_name": "Elizabeth Turner",
+        "answers": {
+            "completedTasks": [
+                "clean burner",
+                "inspect flue"
+            ],
+            "customerFeedback": "very satisfied",
+            "additionalNotes": "Next inspection in 1 year"
+        },
+        "additional_information": null,
+        "created_at": null,
+        "updated_at": null,
+        "name": "Entretien"
+    },
+    {
+        "interventiontype": "Depannage",
+        "id": "3",
+        "intervention_type_id": "3",
+        "site_id": "4",
+        "intervention_date": "2024-05-03T00:00:00.000Z",
+        "company_name": "Reliable Heating Services",
+        "technician_name": "Will Turner",
+        "answers": {
+            "completedTasks": [
+                "replace thermostat",
+                "reset system"
+            ],
+            "customerFeedback": "resolved issue",
+            "additionalNotes": "Monitor system for further issues"
+        },
+        "additional_information": null,
+        "created_at": null,
+        "updated_at": null,
+        "name": "Depannage"
+    },
+    {
+        "interventiontype": "Depose/repose temporaire",
+        "id": "4",
+        "intervention_type_id": "4",
+        "site_id": "5",
+        "intervention_date": "2024-05-04T00:00:00.000Z",
+        "company_name": "Heat and Air Ltd.",
+        "technician_name": "Hector Barbossa",
+        "answers": {
+            "completedTasks": [
+                "remove unit",
+                "store unit temporarily"
+            ],
+            "customerFeedback": "pleased with careful handling",
+            "additionalNotes": "Reinstall in 3 months"
+        },
+        "additional_information": null,
+        "created_at": null,
+        "updated_at": null,
+        "name": "Depose/repose temporaire"
+    },
+    {
+        "interventiontype": "Depose definitive",
+        "id": "5",
+        "intervention_type_id": "5",
+        "site_id": "6",
+        "intervention_date": "2024-05-05T00:00:00.000Z",
+        "company_name": "Total Climate Control",
+        "technician_name": "James Norrington",
+        "answers": {
+            "completedTasks": [
+                "dismantle unit",
+                "secure site"
+            ],
+            "customerFeedback": "sad to see it go",
+            "additionalNotes": "All equipment removed and area cleaned"
+        },
+        "additional_information": null,
+        "created_at": null,
+        "updated_at": null,
+        "name": "Depose definitive"
+    }
+]

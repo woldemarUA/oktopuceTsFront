@@ -7,6 +7,7 @@ import {
 } from 'react';
 
 import { fetchInterventions } from '../actions/interventionsAPI';
+import { getSiteById } from '../actions/sitesAPI';
 
 import InterventionInterface from '../interface/interventionInterface';
 
@@ -45,6 +46,12 @@ const InterventionsProvider: React.FC<InterventionsProviderProps> = ({
   const getIntervetions = async () => {
     try {
       const interventionsData = await fetchInterventions();
+
+      for (const intervention of interventionsData) {
+        const site = await getSiteById(intervention.id);
+        intervention.site_name = site.name;
+      }
+
       setInterventions(interventionsData);
 
       setIntervention(interventionsData[0] || null);

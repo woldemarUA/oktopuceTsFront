@@ -4,6 +4,7 @@ interface ButtonProps {
   className: string;
   path?: string;
   action?: () => void;
+  isDisabled: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -12,6 +13,7 @@ const Button: React.FC<ButtonProps> = ({
   className,
   path,
   action,
+  isDisabled = false,
 }) => {
   // const handleClick = ()=>{
   //     if(path)
@@ -20,7 +22,8 @@ const Button: React.FC<ButtonProps> = ({
     <button
       type={btnType}
       className={className}
-      onClick={action}>
+      onClick={action}
+      disabled={isDisabled}>
       {title}
     </button>
   );
