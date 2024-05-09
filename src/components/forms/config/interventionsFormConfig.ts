@@ -12,6 +12,18 @@ export const InterventionsFormConfig = {
         { value: 2, label: 'Professional' },
       ],
     },
+    company_name: {
+      label: "Nom d'entreprise",
+      initialValue: '',
+      validationSchema: Yup.string().required("Nom d'entreprise nom requis"),
+      type: 'text',
+    },
+    intervention_date: {
+      label: "Date d'intevention",
+      initialValue: '',
+      validationSchema: Yup.string().required("Nom d'entreprise nom requis"),
+      type: 'text',
+    },
     technician_name: {
       label: 'Technicien nom',
       initialValue: '',

@@ -12,3 +12,17 @@ export default interface InterventionInterface {
   created_at: string | null; // Using string to represent timestamp
   updated_at: string | null; // Using string to represent timestamp
 }
+
+export interface InterventionsFormProps {
+  additional_information: string | null;
+  company_name: string;
+  intervention_date: string;
+  intervention_type_id: number;
+  is_electrical_connections_done: boolean;
+  is_functionality_tested: boolean;
+  is_network_leakage_tested: boolean;
+  is_refrigerant_connections_done: boolean;
+  is_unit_installed: boolean;
+  site_id: number;
+  technician_name: string;
+}

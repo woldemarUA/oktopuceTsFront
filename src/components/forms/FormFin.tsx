@@ -2,7 +2,7 @@ import React, { useState, useMemo } from 'react';
 // Importation de React pour utiliser les fonctionnalités React dans le fichier.
 import {
   Formik, // Importation de Formik pour la gestion de formulaires.
-  Form, // Importation du composant Form pour créer un formulaire.
+  // Importation du composant Form pour créer un formulaire.
 } from 'formik';
 // import { Fragment } from 'react/jsx-runtime';
 import * as Yup from 'yup'; // Importation de Yup pour la validation des schémas.
@@ -46,19 +46,7 @@ const FormFin: React.FC<MyFormProps> = ({
   multiConf = {},
 }) => {
   const [message, setMessage] = useState<string>('');
-
-  // const initialValues = Object.keys(formFieldConfig).reduce<
-  //   Record<string, any>
-  // >((acc, key) => {
-  //   acc[key] = formFieldConfig[key].initialValue; // Configuration des valeurs initiales basées sur la configuration passée.
-  //   return acc;
-  // }, {});
-  // const validationSchema = Yup.object(
-  //   Object.keys(formFieldConfig).reduce((acc, key) => {
-  //     acc[key] = formFieldConfig[key].validationSchema; // Configuration du schéma de validation basé sur la configuration passée.
-  //     return acc;
-  //   }, {} as { [key: string]: Yup.AnySchema })
-  // );
+  const [submissionSuccess, setSubmissionSuccess] = useState<boolean>(false);
 
   const initialValues = useMemo(
     () =>
@@ -87,11 +75,18 @@ const FormFin: React.FC<MyFormProps> = ({
       validateOnChange={true}
       validationSchema={validationSchema}
       onSubmit={async (values, actions) => {
-        const resp = await handleSubmit(values);
-        const { msg } = resp;
-        actions.setSubmitting(false); // Arrêt de l'indication de soumission une fois terminée.
-        actions.resetForm(); // Vider le formulaire  une fois terminée.
-        setMessage(msg);
+        try {
+          const resp = await handleSubmit(values);
+          const { msg } = resp;
+          actions.setSubmitting(false); // Arrêt de l'indication de soumission une fois terminée.
+          actions.resetForm(); // Vider le formulaire  une fois terminée.
+          setMessage(msg);
+          setSubmissionSuccess(true);
+        } catch (err) {
+          console.error(err);
+          setSubmissionSuccess(false);
+          setMessage(`Echec d'envoyer de formulaire`);
+        }
       }}>
       {({ values }) => (
         <div className={styles.form}>
@@ -106,6 +101,7 @@ const FormFin: React.FC<MyFormProps> = ({
               valuesForm={values}
               title={title}
               formFieldConfig={multiConf}
+              submissionSuccess={submissionSuccess}
             />
           ) : (
             <FormComponent

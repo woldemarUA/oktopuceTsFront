@@ -10,8 +10,8 @@ import globalStyles from '../../styles/globalStyles';
 const InterventionListItem: React.FC<InterventionListItemProps> = ({
   item,
 }) => {
-  const { company_name, site_name, technician_name, answers } = item;
-
+  const { company_name, site_name, technician_name, answers, site } = item;
+  console.log(item);
   return (
     <>
       <div className={styles.listCol}>
@@ -26,12 +26,12 @@ const InterventionListItem: React.FC<InterventionListItemProps> = ({
         </p>
         <p className={styles.listCell}>
           <span className={styles.label}>Nom du Site : </span>
-          {site_name}
+          {site_name || site}
         </p>
       </div>
       <div className={styles.listCol}>
         <h3 className={globalStyles.headerSection}> Intervention details : </h3>
-        {answers && (
+        {answers ? (
           <>
             <div className={styles.listCell}>
               <span className={styles.label}>Tâches terminées : </span>
@@ -56,6 +56,13 @@ const InterventionListItem: React.FC<InterventionListItemProps> = ({
               {answers.customerFeedback}
             </p>
           </>
+        ) : (
+          <div>
+            <p className={styles.listCell}>
+              <span className={styles.label}>Notes complémentaires : </span>
+              {item.additional_information}
+            </p>
+          </div>
         )}
       </div>
     </>

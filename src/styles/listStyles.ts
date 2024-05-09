@@ -1,5 +1,6 @@
 const styles = {
   listItem: 'flex justify-between gap-x-6 py-1 px-2 ',
+  listItemSpread: 'w-full flex justify-between gap-x-12 py-1 px-2 ',
   userInfoContainer: 'flex min-w-0 gap-x-4',
   userImage: 'h-12 w-12 flex-none rounded-full bg-gray-50',
   listCol: 'min-w-0 flex-auto',

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useFormikContext } from 'formik';
 
 import Button from '../../ui/Button';
@@ -8,38 +8,81 @@ import FormComponent from './FormComponent';
 import { styles } from '../../../styles/formStyles';
 import globalStyles from '../../../styles/globalStyles';
 
+import CheckButtonSVG from '../../../assets/buttons/checkButton.svg';
+import BackButtonSVG from '../../../assets/buttons/backArrowBtn.svg';
+
 interface MultiStepProps {
   valuesForm: Record<string, any>;
   title: string;
   formFieldConfig: Record<string | number, any>;
+  submissionSuccess: boolean;
 }
 
 const MultiStep: React.FC<MultiStepProps> = ({
   valuesForm,
   title,
   formFieldConfig,
+  submissionSuccess,
 }) => {
   const [step, setStep] = useState<number>(1);
   const [isCurrentStepValid, setIsCurrentStepValid] = useState<boolean>(false);
 
   const { validateForm, values } = useFormikContext();
 
-  const steps = Object.keys(formFieldConfig).map((key) => key);
-  //   const stepBtnAction = ()=>{}
-
-  const handleNext = async (s: number) => {
+  const stepValidation = async (): Promise<boolean> => {
     const formErrors: Record<string, any> = await validateForm();
-    console.log('form errors', formErrors);
+
     const currentStepFields = formFieldConfig[step];
-    console.log('current step fields', currentStepFields);
+
     const isStepValid = Object.keys(currentStepFields).every(
       (key) => !formErrors[key]
     );
-    console.log(isStepValid);
-    setIsCurrentStepValid(isStepValid);
-    // if (isCurrentStepValid) setStep();
-    // // console.log(isCurrentStepValid);
-    setStep(s);
+    return isStepValid;
+  };
+
+  useEffect(() => {
+    if (submissionSuccess) {
+      setStep(1);
+      setIsCurrentStepValid(false);
+    }
+  }, [submissionSuccess]);
+
+  useEffect(() => {
+    stepValidation().then((res) => {
+      setIsCurrentStepValid(res);
+    });
+  }, [values]);
+
+  const steps = Object.keys(formFieldConfig).map((key) => key);
+  //   const stepBtnAction = ()=>{}
+
+  const handleStepBtnClick = (s: number) => {
+    if (s <= 1 && isCurrentStepValid && step != s) {
+      setStep(step - 1);
+      return;
+    }
+    if (s != step && isCurrentStepValid) {
+      setStep(step + 1);
+      setIsCurrentStepValid(false);
+    }
+
+    if (s != step && !isCurrentStepValid && s != steps.length) {
+      setStep(step - 1);
+      setIsCurrentStepValid(true);
+    }
+  };
+
+  const setStepBtnTitle = (s: number) => {
+    if (
+      (isCurrentStepValid && step === s) ||
+      (step != s && isCurrentStepValid && s < step)
+    )
+      return <img src={CheckButtonSVG} />;
+    if (step != s && !isCurrentStepValid && s < step)
+      return <img src={BackButtonSVG} />;
+    if (step != s) return s;
+    if (step === s && !isCurrentStepValid) return s;
+    // return ;
   };
 
   return (
@@ -65,18 +108,15 @@ const MultiStep: React.FC<MultiStepProps> = ({
           <div
             key={s}
             className={styles.columnSmall}>
-            <Button
-              title={s}
-              btnType='button'
+            <span
               className={
                 step === parseInt(s, 10)
                   ? globalStyles.roundedBtnActive
-                  : globalStyles.roundedBtn
+                  : globalStyles.roundedBtnDisabled
               }
-              action={() => handleNext(parseInt(s, 10))}
-              isDisabled={false}
-              // isDisabled={!isCurrentStepValid}
-            />
+              onClick={() => handleStepBtnClick(parseInt(s, 10))}>
+              {setStepBtnTitle(parseInt(s, 10))}
+            </span>
           </div>
         ))}
       </div>

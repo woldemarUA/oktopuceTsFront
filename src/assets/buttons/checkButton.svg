@@ -1,0 +1,7 @@
+<svg width="100px" height="100px" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <!-- Background Circle -->
+    <circle cx="12" cy="12" r="10" fill="#2dd4bf" />
+
+    <!-- Checkmark -->
+    <path fill="white" d="M9.99977 16.17L6.82977 12.999L5.40977 14.41L9.99977 19L18.9998 10L17.5898 8.58999L9.99977 16.17Z" />
+</svg>

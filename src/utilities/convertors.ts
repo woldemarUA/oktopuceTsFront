@@ -23,6 +23,10 @@ export function getTitle(item: any): string {
     return `${formatDate(item.intervention_date)} - ${item.int_type_name}`;
   }
 
+  if (item.type) {
+    return `${item.type} - site: ${item.site} -  fait par: ${item.technician_name}`;
+  }
+
   // Default title if none of the conditions are met
   return 'No title available';
 }
@@ -36,4 +40,17 @@ export const formStepsConvertor = (
   }
 
   return conf;
+};
+
+export const getSubset = (
+  smallObject: Record<string, any>,
+  bigObject: Record<string, any>
+) => {
+  return Object.keys(smallObject).reduce(
+    (acc: Record<string, any>, key: string) => {
+      if (bigObject.hasOwnProperty(key)) acc[key] = bigObject[key];
+      return acc;
+    },
+    {}
+  );
 };

@@ -36,7 +36,7 @@ const ListItems: React.FC<ListItemsProps> = ({
       <h2 className={globalStyles.header}> {title} </h2>
       <ul
         role='list'
-        className='divide-y divide-gray-100 mt-2'>
+        className=' mt-2'>
         {items.map((item) => {
           const children = (
             <ListItemComp
@@ -45,14 +45,17 @@ const ListItems: React.FC<ListItemsProps> = ({
             />
           );
           return (
-            <Accordion
+            <div
               key={item.id}
-              title={getTitle(item)}
-              id={item.id}
-              children={children}
-              isOpen={item.id === openAccordion}
-              toggleAccordion={toggleAccordion}
-            />
+              className='border-b border-grey-100 '>
+              <Accordion
+                title={getTitle(item)}
+                id={item.id}
+                children={children}
+                isOpen={item.id === openAccordion}
+                toggleAccordion={toggleAccordion}
+              />
+            </div>
           );
         })}
       </ul>

@@ -4,11 +4,14 @@ import { InterventionsFormConfig } from '../../components/forms/config/intervent
 import FormFin from '../../components/forms/FormFin';
 
 import { useSites } from '../../context/SitesProvider';
+import { useInterventions } from '../../context/InterventionsProvider';
 
 import { formStepsConvertor } from '../../utilities/convertors';
 
 const InterventionsForm: React.FC = () => {
   const { sites } = useSites();
+
+  const { handleAddIntervention } = useInterventions();
   const formConf = formStepsConvertor(InterventionsFormConfig);
 
   const sitesOptions = sites.map((site) => ({
@@ -22,11 +25,11 @@ const InterventionsForm: React.FC = () => {
 
   return (
     <>
-      <img src={UniteImage} />
+      {/* <img src={UniteImage} /> */}
       <FormFin
         title='Ajout Intervention'
         formFieldConfig={formConf}
-        handleSubmit={(values: any) => console.log(values)}
+        handleSubmit={(values: any) => handleAddIntervention(values)}
         multiStep={true}
         multiConf={InterventionsFormConfig}
       />
