@@ -1,0 +1,122 @@
+[
+    {
+        "id": 1,
+        "name": "BIBLIOTHEQUE"
+    },
+    {
+        "id": 2,
+        "name": "BUANDERIE"
+    },
+    {
+        "id": 3,
+        "name": "BUREAU"
+    },
+    {
+        "id": 4,
+        "name": "CAVE A VIN"
+    },
+    {
+        "id": 5,
+        "name": "CELLIER"
+    },
+    {
+        "id": 6,
+        "name": "CHAMBRE BEBE"
+    },
+    {
+        "id": 7,
+        "name": "CHAMBRE D'AMIS"
+    },
+    {
+        "id": 8,
+        "name": "CHAMBRE ENFANT"
+    },
+    {
+        "id": 9,
+        "name": "CHAMBRE PARENTALE"
+    },
+    {
+        "id": 10,
+        "name": "COMBLES"
+    },
+    {
+        "id": 11,
+        "name": "CUISINE"
+    },
+    {
+        "id": 12,
+        "name": "ENTREE"
+    },
+    {
+        "id": 13,
+        "name": "GARAGE"
+    },
+    {
+        "id": 14,
+        "name": "GRENIER"
+    },
+    {
+        "id": 15,
+        "name": "MEZZANINE"
+    },
+    {
+        "id": 16,
+        "name": "SALLE A MANGER"
+    },
+    {
+        "id": 17,
+        "name": "SALLE DE BAIN"
+    },
+    {
+        "id": 18,
+        "name": "SALLE DE CINEMA"
+    },
+    {
+        "id": 19,
+        "name": "SALLE DE JEUX"
+    },
+    {
+        "id": 20,
+        "name": "SALLE DE MUSIQUE"
+    },
+    {
+        "id": 21,
+        "name": "SALLE DE RECEPTION"
+    },
+    {
+        "id": 22,
+        "name": "SALLE DE REUNION"
+    },
+    {
+        "id": 23,
+        "name": "SALLE DE SPORT"
+    },
+    {
+        "id": 24,
+        "name": "SALLE STOCKAGE"
+    },
+    {
+        "id": 25,
+        "name": "SALON"
+    },
+    {
+        "id": 26,
+        "name": "SOLARIUM"
+    },
+    {
+        "id": 27,
+        "name": "SOUS-SOL"
+    },
+    {
+        "id": 28,
+        "name": "VERANDA"
+    },
+    {
+        "id": 29,
+        "name": "WC"
+    },
+    {
+        "id": 30,
+        "name": "AUTRE"
+    }
+]

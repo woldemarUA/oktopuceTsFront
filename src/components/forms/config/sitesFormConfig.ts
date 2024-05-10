@@ -136,19 +136,3 @@ export const SitesFormConfig = {
       values.maintenance_provider === '2',
   },
 };
-
-// Mail (TEXTE LIBRE ALPHANUMERIQUE)
-//   maintenance_provider: {
-//     label: 'Fournisseur de maintenance',
-//     initialValue: '{}', // Supposons un objet JSON vide par défaut
-//     validationSchema: Yup.lazy((value) =>
-//       typeof value === 'string' && value.trim() !== ''
-//         ? Yup.object()
-//             .shape({
-//               // Définissez le schéma en fonction de la structure JSON attendue
-//             })
-//             .required('Les détails du fournisseur de maintenance sont requis')
-//         : Yup.string().notRequired()
-//     ),
-//     type: 'text', // Vous pourriez vouloir un composant personnalisé ici pour gérer l'entrée JSON
-//   },

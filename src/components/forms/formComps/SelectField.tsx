@@ -1,10 +1,15 @@
+import { useMemo, useState, useCallback } from 'react';
+
 import {
   Field, // Importation du composant Field pour créer des champs de formulaire.
   ErrorMessage,
+  useFormikContext,
 } from 'formik';
 
 import globalStyles from '../../../styles/globalStyles';
 import { styles } from '../../../styles/formStyles';
+
+const PICTO_PATH = `${import.meta.env.VITE_APP_ASSETS_PATH}/images/picto`;
 
 export interface Option {
   value: string | number; // La valeur de l'option.
@@ -17,6 +22,7 @@ interface SelectFieldProps {
   options: Option[];
   type: string;
   label: string;
+  image: boolean;
 }
 
 const SelectField: React.FC<SelectFieldProps> = ({
@@ -24,17 +30,52 @@ const SelectField: React.FC<SelectFieldProps> = ({
   options,
   type,
   name,
+  image,
 }) => {
+  const [selectedImage, setSelectedImage] = useState<string>();
+
+  const { setFieldValue } = useFormikContext();
+  const imagePaths = useMemo(() => {
+    return image
+      ? options.map(
+          (option) => option.value && `${PICTO_PATH}/${option.label}.png`
+        )
+      : [];
+  }, [options, image]);
+  const handleChange = useCallback(
+    (event: React.ChangeEvent<HTMLSelectElement>) => {
+      const { value } = event.target;
+      setFieldValue(name, value); // Update Formik field value
+
+      if (image) {
+        const selectedOption = options.find(
+          (option) => option.value.toString() === value
+        );
+        if (selectedOption) {
+          const imagePath = `${PICTO_PATH}/${selectedOption.value}.png`;
+          setSelectedImage(imagePath);
+        }
+      }
+    },
+    [setFieldValue, name, options, image]
+  );
   return (
     <div className={styles.row}>
       <div className={styles.columnSmall}>{label}</div>
+      {image && selectedImage && (
+        <img
+          src={selectedImage}
+          alt='Selected'
+        />
+      )}
       <div className={styles.columnBig}>
         <Field
           className={styles.select}
           name={name}
           as={type}
           label={label}
-          options={options}>
+          options={options}
+          onChange={handleChange}>
           {options.map((option: Option) => {
             return (
               <option
@@ -45,6 +86,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
             );
           })}
         </Field>
+
         <ErrorMessage
           name={name}
           component='div'

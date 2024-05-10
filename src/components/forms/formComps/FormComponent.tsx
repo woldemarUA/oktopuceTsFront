@@ -2,9 +2,8 @@ import { Form } from 'formik'; // Importation du composant Form pour créer un f
 
 import SelectField from './SelectField';
 import InputField from './InputField';
-import Button from '../../ui/Button';
 
-import globalStyles from '../../../styles/globalStyles';
+import { chaleurEauOptions } from '../config/parametrageFromConfig';
 
 interface FormComponentProps {
   formFieldConfig: any;
@@ -16,15 +15,26 @@ interface FormComponentProps {
 const FormComponent: React.FC<FormComponentProps> = ({
   formFieldConfig,
   values,
-  title,
+  // title,
   children,
 }) => {
+  // console.log(formFieldConfig);
   return (
     <Form>
       {Object.keys(formFieldConfig).map((key) => {
-        const { type, label, options, visibleWhen } = formFieldConfig[key];
+        const { type, label, visibleWhen } = formFieldConfig[key];
+        let { options } = formFieldConfig[key];
 
-        if (visibleWhen && !visibleWhen(values)) return null;
+        if (visibleWhen && !visibleWhen(values)) {
+          return null;
+        }
+        if (typeof options === 'function') {
+          options = options(values); // Evaluate options if it's a function
+
+          values.equipment_type_id = chaleurEauOptions.includes(values.endroit)
+            ? values.equipment_type_id
+            : values.endroit;
+        }
 
         if (type === 'select' && options) {
           return (
@@ -34,6 +44,7 @@ const FormComponent: React.FC<FormComponentProps> = ({
               options={options}
               type={type}
               label={label}
+              image={formFieldConfig[key]['image']}
             />
           );
         }
