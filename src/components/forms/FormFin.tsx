@@ -35,6 +35,7 @@ interface MyFormProps {
   title: string;
   multiStep?: boolean;
   multiConf?: Record<string | number, any>;
+  containerStyle?: boolean;
 }
 
 // Composant de formulaire générique qui accepte toute configuration de formulaire.
@@ -44,6 +45,7 @@ const FormFin: React.FC<MyFormProps> = ({
   title,
   multiStep = false,
   multiConf = {},
+  containerStyle = true,
 }) => {
   const [message, setMessage] = useState<string>('');
   const [submissionSuccess, setSubmissionSuccess] = useState<boolean>(false);
@@ -89,10 +91,12 @@ const FormFin: React.FC<MyFormProps> = ({
         }
       }}>
       {({ values }) => (
-        <div className={styles.form}>
-          <div className={globalStyles.row}>
-            <h2 className={globalStyles.header}>{title}</h2>
-          </div>
+        <div className={containerStyle ? styles.form : ''}>
+          {containerStyle && (
+            <div className={globalStyles.row}>
+              <h2 className={globalStyles.header}>{title}</h2>
+            </div>
+          )}
           <div className={globalStyles.row}>
             <p className={globalStyles.message}>{message} </p>
           </div>

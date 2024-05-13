@@ -4,7 +4,7 @@ import { EquipmentFormValues } from '../../../interface/equipmentInterface';
 
 export const chaleurEauOptions = ['1', '2', '4', '8'];
 
-const endroit = new Map([
+export const endroit_mapping = new Map([
   [
     1,
     [
@@ -34,7 +34,7 @@ const endroit = new Map([
   ],
 ]);
 
-const equipment_type_id_mapping = new Map([
+export const equipment_type_id_mapping = new Map([
   [
     '11',
     [
@@ -77,13 +77,6 @@ const equipment_type_id_mapping = new Map([
   ],
 ]);
 
-// const pictogramMapping = new Map([
-//   [
-//     '21',
-//     'https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png',
-//   ],
-// ]);
-
 export const parametrageFormConfig = {
   site_id: {
     label: 'Sur quel site est le produit?',
@@ -114,7 +107,7 @@ export const parametrageFormConfig = {
     validationSchema: Yup.number().required(' Type requis').integer(),
     type: 'select', // Input type
     options: (values: Record<string, any>) => {
-      return endroit.get(parseInt(values.equipment_type, 10));
+      return endroit_mapping.get(parseInt(values.equipment_type, 10));
     },
   },
   equipment_type_id: {

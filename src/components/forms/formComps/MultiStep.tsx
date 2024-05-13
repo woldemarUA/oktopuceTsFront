@@ -5,11 +5,12 @@ import Button from '../../ui/Button';
 
 import FormComponent from './FormComponent';
 
+import MultiFormNavButtons from './MultiFormNavButtons';
+
 import { styles } from '../../../styles/formStyles';
 import globalStyles from '../../../styles/globalStyles';
 
-import CheckButtonSVG from '../../../assets/buttons/checkButton.svg';
-import BackButtonSVG from '../../../assets/buttons/backArrowBtn.svg';
+const BUTTONS_PATH = `${import.meta.env.VITE_APP_ASSETS_PATH}/images/buttons/`;
 
 interface MultiStepProps {
   valuesForm: Record<string, any>;
@@ -54,7 +55,6 @@ const MultiStep: React.FC<MultiStepProps> = ({
   }, [values]);
 
   const steps = Object.keys(formFieldConfig).map((key) => key);
-  //   const stepBtnAction = ()=>{}
 
   const handleStepBtnClick = (s: number) => {
     if (s <= 1 && isCurrentStepValid && step != s) {
@@ -77,9 +77,9 @@ const MultiStep: React.FC<MultiStepProps> = ({
       (isCurrentStepValid && step === s) ||
       (step != s && isCurrentStepValid && s < step)
     )
-      return <img src={CheckButtonSVG} />;
+      return <img src={`${BUTTONS_PATH}checkButton.svg`} />;
     if (step != s && !isCurrentStepValid && s < step)
-      return <img src={BackButtonSVG} />;
+      return <img src={`${BUTTONS_PATH}backArrowBtn.svg`} />;
     if (step != s) return s;
     if (step === s && !isCurrentStepValid) return s;
     // return ;
@@ -105,19 +105,26 @@ const MultiStep: React.FC<MultiStepProps> = ({
       </FormComponent>
       <div className='flex justify-around gap-x-2 py-1 px-2 '>
         {steps.map((s) => (
-          <div
+          // <div
+          //   key={s}
+          //   className={styles.columnSmall}>
+          //   <span
+          //     className={
+          //       step === parseInt(s, 10)
+          //         ? globalStyles.roundedBtnActive
+          //         : globalStyles.roundedBtnDisabled
+          //     }
+          //     onClick={() => handleStepBtnClick(parseInt(s, 10))}>
+          //     {setStepBtnTitle(parseInt(s, 10))}
+          //   </span>
+          // </div>
+          <MultiFormNavButtons
             key={s}
-            className={styles.columnSmall}>
-            <span
-              className={
-                step === parseInt(s, 10)
-                  ? globalStyles.roundedBtnActive
-                  : globalStyles.roundedBtnDisabled
-              }
-              onClick={() => handleStepBtnClick(parseInt(s, 10))}>
-              {setStepBtnTitle(parseInt(s, 10))}
-            </span>
-          </div>
+            currentStep={parseInt(s, 10)}
+            step={step}
+            handleStepBtnClick={handleStepBtnClick}
+            setStepBtnTitle={setStepBtnTitle}
+          />
         ))}
       </div>
     </>

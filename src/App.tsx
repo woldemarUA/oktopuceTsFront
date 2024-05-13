@@ -8,6 +8,7 @@ import Intro from './pages/Intro';
 import clientRoutes from './routes/ClientRoutes';
 import sitesRoutes from './routes/SitesRoutes';
 import interventionsRoutes from './routes/InterventionsRoutes';
+import equipmentRoutes from './routes/EquipmentRoutes';
 
 import globalStyles from './styles/globalStyles';
 
@@ -29,6 +30,13 @@ const App: React.FC = () => {
                 caseSensitive={true}
               />
               {clientRoutes.map((route) => (
+                <Route
+                  key={route.path}
+                  path={route.path}
+                  element={route.element}
+                />
+              ))}
+              {equipmentRoutes.map((route) => (
                 <Route
                   key={route.path}
                   path={route.path}

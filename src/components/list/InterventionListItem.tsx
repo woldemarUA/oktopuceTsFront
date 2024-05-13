@@ -11,7 +11,7 @@ const InterventionListItem: React.FC<InterventionListItemProps> = ({
   item,
 }) => {
   const { company_name, site_name, technician_name, answers, site } = item;
-  console.log(item);
+
   return (
     <>
       <div className={styles.listCol}>

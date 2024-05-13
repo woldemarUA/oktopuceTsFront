@@ -15,6 +15,7 @@ const globalStyles = {
     'rounded-full w-12 h-12 bg-teal-800 text-white flex items-center justify-center',
   roundedBtnActive:
     'rounded-full w-12 h-12 bg-teal-400  text-white flex items-center justify-center',
+  form: 'space-y-4 max-w-xl mx-auto p-5 border border-gray-200 rounded-md shadow-sm',
 };
 
 export default globalStyles;

@@ -7,6 +7,8 @@ import styles from '../../styles/navBarStyles';
 import clientRoutes from '../../routes/ClientRoutes';
 import sitesRoutes from '../../routes/SitesRoutes';
 import interventionsRoutes from '../../routes/InterventionsRoutes';
+import equipmentRoutes from '../../routes/EquipmentRoutes';
+
 import SetMenuItems from './SetMenuItems';
 
 interface MenuItemsProps {
@@ -38,7 +40,7 @@ const MenuItems: React.FC<MenuItemsProps> = ({ isActive }) => {
       <NavLink
         to={'/'}
         className={getActiveClass('/')}>
-        Acceuil
+        Parametrage
       </NavLink>
       <SetMenuItems
         titre='Clients'
@@ -46,6 +48,13 @@ const MenuItems: React.FC<MenuItemsProps> = ({ isActive }) => {
         getActiveClass={getActiveClass}
         isOpen={openMenu === 'Clients'}
         toggleMenu={() => toggleMenu('Clients')}
+      />
+      <SetMenuItems
+        titre='Machines'
+        routes={equipmentRoutes}
+        getActiveClass={getActiveClass}
+        isOpen={openMenu === 'Machines'}
+        toggleMenu={() => toggleMenu('Machines')}
       />
       <SetMenuItems
         titre='Sites'

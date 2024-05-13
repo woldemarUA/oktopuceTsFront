@@ -1,4 +1,4 @@
-import { useMemo, useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 
 import {
   Field, // Importation du composant Field pour créer des champs de formulaire.
@@ -35,13 +35,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
   const [selectedImage, setSelectedImage] = useState<string>();
 
   const { setFieldValue } = useFormikContext();
-  const imagePaths = useMemo(() => {
-    return image
-      ? options.map(
-          (option) => option.value && `${PICTO_PATH}/${option.label}.png`
-        )
-      : [];
-  }, [options, image]);
+
   const handleChange = useCallback(
     (event: React.ChangeEvent<HTMLSelectElement>) => {
       const { value } = event.target;
@@ -60,40 +54,48 @@ const SelectField: React.FC<SelectFieldProps> = ({
     [setFieldValue, name, options, image]
   );
   return (
-    <div className={styles.row}>
-      <div className={styles.columnSmall}>{label}</div>
-      {image && selectedImage && (
-        <img
-          src={selectedImage}
-          alt='Selected'
-        />
-      )}
-      <div className={styles.columnBig}>
-        <Field
-          className={styles.select}
-          name={name}
-          as={type}
-          label={label}
-          options={options}
-          onChange={handleChange}>
-          {options.map((option: Option) => {
-            return (
-              <option
-                key={option.value}
-                value={option.value}>
-                {option.label}
-              </option>
-            );
-          })}
-        </Field>
+    <>
+      <div className={styles.row}>
+        <div className={styles.columnSmall}>{label} </div>
 
-        <ErrorMessage
-          name={name}
-          component='div'
-          className={globalStyles.error}
-        />
+        <div className={styles.columnBig}>
+          <Field
+            className={styles.select}
+            name={name}
+            as={type}
+            label={label}
+            options={options}
+            onChange={handleChange}>
+            {options.map((option: Option) => {
+              return (
+                <option
+                  key={option.value}
+                  value={option.value}>
+                  {option.label}
+                </option>
+              );
+            })}
+          </Field>
+
+          <ErrorMessage
+            name={name}
+            component='div'
+            className={globalStyles.error}
+          />
+        </div>
       </div>
-    </div>
+      {image && selectedImage && (
+        <div className={styles.row}>
+          <div className={styles.columnSmall}></div>
+          <div className={`${styles.columnBig} items-center`}>
+            <img
+              src={selectedImage}
+              alt='Selected'
+            />
+          </div>
+        </div>
+      )}
+    </>
   );
 };
 

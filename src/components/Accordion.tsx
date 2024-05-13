@@ -1,6 +1,6 @@
 import React from 'react';
 
-import DownButtonSVG from '../assets/buttons/downArrorBtnTransparent.svg';
+const BUTTONS_PATH = `${import.meta.env.VITE_APP_ASSETS_PATH}/images/buttons/`;
 
 import styles from '../styles/listStyles';
 interface AccordionProps {
@@ -26,7 +26,7 @@ export const Accordion: React.FC<AccordionProps> = ({
 
           <div>
             <img
-              src={DownButtonSVG}
+              src={`${BUTTONS_PATH}downArrorBtnTransparent.svg`}
               className='w-4 '
             />
           </div>

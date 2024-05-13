@@ -22,7 +22,7 @@ export const InterventionsFormConfig = {
       label: "Date d'intevention",
       initialValue: '',
       validationSchema: Yup.string().required("Nom d'entreprise nom requis"),
-      type: 'text',
+      type: 'date',
     },
     technician_name: {
       label: 'Technicien nom',

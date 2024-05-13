@@ -3,12 +3,15 @@ import { useState } from 'react';
 import MenuItems from '../components/menuComps/MenuItems';
 
 import styles from '../styles/navBarStyles';
-import LogoSVG from '../assets/logo/logo.svg';
+// import LogoSVG from '../assets/logo/logo.svg';
 
 interface MenuItemsProps {
   isActive: (url: string) => boolean;
 }
 
+const LOGO_PATH = `${
+  import.meta.env.VITE_APP_ASSETS_PATH
+}/images/logo/logo.svg`;
 const NavBar: React.FC = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState<boolean>(false);
 
@@ -57,7 +60,7 @@ const NavBar: React.FC = () => {
         <div className={styles.centerFlex}>
           <div className={styles.logoContainer}>
             <img
-              src={LogoSVG}
+              src={LOGO_PATH}
               alt='Logo'
               className={styles.logo}
             />
