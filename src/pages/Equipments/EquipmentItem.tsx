@@ -1,23 +1,27 @@
 import climatisationConfig from './equipmentConfigs/climatisationConfig';
 import pompeChaleurCongfig from './equipmentConfigs/pompeChaleurCongfig';
-import * as yup from 'yup';
+import thermodynamiqueConfig from './equipmentConfigs/thermodynamiqueConfig';
 
 import globalStyles from '../../styles/globalStyles';
 
 import FormFin from '../../components/forms/FormFin';
+import { styles } from '../../styles/formStyles';
 
-const formConfigMapping = new Map([
+type configSchema = () => Record<number, any>;
+
+const formConfigMapping = new Map<number, configSchema>([
   [1, climatisationConfig],
   [2, pompeChaleurCongfig],
+  [3, thermodynamiqueConfig],
 ]);
 
 const PICTO_PATH = `${import.meta.env.VITE_APP_ASSETS_PATH}/images/picto`;
 interface EquipmentItemProps {
-  endroit: string | undefined;
-  equipment_type: string;
+  sousTitre: string | undefined;
+
   titre: string | undefined;
-  image: string;
-  endroit_id: number;
+
+  formValues: Record<string, any>;
 }
 
 interface ConfigMap {
@@ -29,31 +33,34 @@ interface ConfigMap {
 type FormOptions = Record<string | number, any>;
 
 const EquipmentItem = ({
-  endroit,
-  equipment_type,
+  sousTitre,
   titre,
-  image,
-  endroit_id,
+
+  formValues,
 }: EquipmentItemProps) => {
+  const { equipment_type, endroit, equipment_type_id } = formValues;
   const configFunction = formConfigMapping.get(parseInt(equipment_type, 10));
   let formOptionsAll: ConfigMap = {};
 
   if (configFunction) {
     formOptionsAll = configFunction();
   }
-  console.log(formOptionsAll);
-  console.log(endroit_id);
 
-  const formOptions: FormOptions = formOptionsAll[endroit_id];
-
+  const formOptions: FormOptions = formOptionsAll[parseInt(endroit, 10)];
+  console.log(formValues);
   return (
     <>
-      <div className={globalStyles.row}>
-        <img src={`${PICTO_PATH}/${image}.png`} />
-      </div>
-      <div className={globalStyles.row}>
-        <h3 className={globalStyles.headerSection}>{titre}</h3>
-        <p className={globalStyles.headerSection}>{endroit}</p>
+      <div className={globalStyles.imageRow}>
+        <div className={globalStyles.imgLabelCell}>
+          <h3 className='text-lg font-semibold'>{titre}</h3>
+          <p className='text-base '>{sousTitre}</p>
+        </div>
+        <div className={globalStyles.imageImgCell}>
+          <img
+            src={`${PICTO_PATH}/${equipment_type_id}.png`}
+            alt='Equipment'
+          />
+        </div>
       </div>
 
       <FormFin
@@ -61,6 +68,7 @@ const EquipmentItem = ({
         containerStyle={false}
         title='Informations'
         handleSubmit={(values) => console.log(values)}
+        formValues={formValues}
       />
     </>
   );

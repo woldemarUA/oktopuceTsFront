@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Form } from 'formik'; // Importation du composant Form pour créer un formulaire.
 
 import SelectField from './SelectField';
@@ -7,38 +6,36 @@ import Switch from './Switch';
 import DatePickerComponent from './DatePickerComponent';
 import MultiCheckComponent from './MultiCheckComponent';
 
-import { chaleurEauOptions } from '../config/parametrageFromConfig';
+import globalStyles from '../../../styles/globalStyles';
 
 interface FormComponentProps {
   formFieldConfig: any;
   values: any;
   title: string;
   children: React.ReactNode;
+  formValues?: Record<string, any>;
 }
 
 const FormComponent: React.FC<FormComponentProps> = ({
   formFieldConfig,
   values,
-  // title,
+
   children,
 }) => {
-  const [isSwitch, setIsSwitch] = useState<boolean>(false);
-
+  console.log(values);
   return (
     <Form>
       {Object.keys(formFieldConfig).map((key, index) => {
         const { type, label, visibleWhen } = formFieldConfig[key];
+
         let { options } = formFieldConfig[key];
 
         if (visibleWhen && !visibleWhen(values)) {
+          // console.log('visible', values);
           return null;
         }
         if (typeof options === 'function') {
           options = options(values); // Evaluate options if it's a function
-
-          values.equipment_type_id = chaleurEauOptions.includes(values.endroit)
-            ? values.equipment_type_id
-            : values.endroit;
         }
 
         if (type === 'date')
@@ -52,10 +49,12 @@ const FormComponent: React.FC<FormComponentProps> = ({
 
         if (type === 'multicheck') {
           return (
-            <MultiCheckComponent
-              key={key}
-              options={formFieldConfig[key].options}
-            />
+            <div key={key}>
+              <h3 className={`${globalStyles.headerSection} text-center`}>
+                {label}
+              </h3>
+              <MultiCheckComponent options={formFieldConfig[key].options} />
+            </div>
           );
         }
 

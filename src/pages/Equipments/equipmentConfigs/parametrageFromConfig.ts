@@ -2,7 +2,15 @@ import * as Yup from 'yup';
 
 import { EquipmentFormValues } from '../../../interface/equipmentInterface';
 
+// regulates equipment_type_id visiblity
 export const chaleurEauOptions = ['1', '2', '4', '8'];
+
+// regulates equipment_type_id asignement (used in select Field) values.endroit
+export const eqTypeIdAssign: Record<string, string>[] = [
+  { endroit: '3', equipment_type_id: '10' },
+  { endroit: '6', equipment_type_id: '15' },
+  { endroit: '7', equipment_type_id: '16' },
+];
 
 export const endroit_mapping = new Map([
   [
@@ -18,9 +26,9 @@ export const endroit_mapping = new Map([
     2,
     [
       { value: '', label: 'Select type' },
-      { value: 3, label: 'Module intérieur (système bi-bloc)' },
+      { value: 3, label: 'Module intérieur ' },
       { value: 4, label: 'Unité extérieure ' },
-      // { value: 5, label: 'Unité extérieure (système bi-bloc)' },
+      // { value: 5, label: 'Unité extérieure (système mono-bloc)' },
     ],
   ],
   [
@@ -56,15 +64,15 @@ export const equipment_type_id_mapping = new Map([
       { value: 9, label: 'Unité VRV' },
     ],
   ],
-  ['23', [{ value: 10, label: 'Module intérieure' }]],
+  // ['23', [{ value: 10, label: 'Module intérieure' }]],
   [
     '24',
     [
       { value: '', label: 'Select type' },
-      { value: 11, label: 'Unité monobloc (simple ventilateur)' },
-      { value: 12, label: 'Unité monobloc (double ventilateur)' },
-      { value: 13, label: 'Unité bi-bloc double ventilateur' },
-      { value: 14, label: 'Unité bi-bloc monobloc' },
+      { value: 11, label: 'Systeme monobloc (simple ventilateur)' },
+      { value: 12, label: 'Systeme monobloc (double ventilateur)' },
+      { value: 13, label: 'Systeme bi-bloc double ventilateur' },
+      { value: 14, label: 'Systeme bi-bloc monobloc' },
     ],
   ],
   [
@@ -95,7 +103,7 @@ export const parametrageFormConfig = {
     validationSchema: Yup.number().required(' Type requis').integer(),
     type: 'select', // Input type
     options: [
-      { value: '', label: 'Select a role' },
+      { value: '', label: 'Choissisez' },
       { value: 1, label: 'CLIMATISATION' },
       { value: 2, label: 'POMPE A CHALEUR' },
       { value: 3, label: 'CHAUFFE-EAU THERMODYNAMIQUE' },

@@ -19,7 +19,7 @@ interface InputFieldProps {
 
 const InputField: React.FC<InputFieldProps> = ({ label, type, name }) => {
   const [isLeak, setIsLeak] = useState<boolean>(false);
-  const [leakValue, setLeakValue] = useState<string | null>(null);
+  const [leakValue, setLeakValue] = useState<string>('');
   const { setFieldValue, values } = useFormikContext();
 
   const { gas_types } = useEquipments();

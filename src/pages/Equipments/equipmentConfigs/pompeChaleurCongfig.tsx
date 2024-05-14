@@ -2,21 +2,20 @@ import * as Yup from 'yup';
 
 import { useEquipments } from '../../../context/EquipmentProvider';
 
-export const convertToOptions = (options: Record<string, any>[]) => {
-  return [
-    { value: '', label: 'Choissisez' },
-    ...options.map((option) => {
-      const optionFin: Record<string, string | number> = {};
-      optionFin.value = option.id;
-      optionFin.label = option.name;
-      if (option?.global_warming_potential !== undefined) {
-        optionFin.potentiel = option.global_warming_potential;
-      }
-      // return { value: option.id, label: option.name };
-      return optionFin;
-    }),
-  ];
-};
+import {
+  brandIds,
+  equipment_model,
+  serial_number,
+  finalites,
+  gas_type_id,
+  gas_weight,
+  has_leak_detection,
+  leak_detection_periodicity,
+  unite_exterieur_type_id,
+  convertToOptions,
+  installation_date,
+  nfc_tag_id,
+} from './equipmentConfigSharedFields';
 
 const pompeChaleurCongfig = () => {
   const { equipmentLocations, equipmentBrands, gas_types } = useEquipments();
@@ -24,36 +23,22 @@ const pompeChaleurCongfig = () => {
   const equipmentBrandsOptions = convertToOptions(equipmentBrands);
   const locationsOptions = convertToOptions(equipmentLocations);
   const gas_types_options = convertToOptions(gas_types);
-  const equipment_brand_id = {
-    label: 'Marque',
-    initialValue: '',
-    validationSchema: Yup.number().required('Marque requis').integer(),
-    type: 'select', // Input type
-    options: equipmentBrandsOptions,
-  };
 
-  const equipment_model = {
-    label: 'Modèle',
-    initialValue: '',
-    validationSchema: Yup.string().required('Modèle requis'),
-    type: 'text',
-  };
+  // const equipment_brand_id = { ...brandIds, options: equipmentBrandsOptions };
 
-  const serial_number = {
-    label: 'Numéro de série',
-    initialValue: '',
-    validationSchema: Yup.string().required('Numéro de série requis'),
-    type: 'text',
-  };
-
-  //   const remote_control_number = {
-  //     label: 'Référence de télécommande',
-  //     initialValue: '',
-  //     validationSchema: Yup.string().required('Référence de télécommande requis'),
-  //     type: 'text',
-  //   };
   return {
     3: {
+      unite_interieur_type_id: {
+        label: 'Type',
+        initialValue: '',
+        validationSchema: Yup.number().required('Emplacement requis').integer(),
+        type: 'select', // Input type
+        options: [
+          { value: '', label: 'Choissisez' },
+          { value: 301, label: 'MONOBLOCK' },
+          { value: 302, label: 'BI-BLOCK' },
+        ],
+      },
       location_id: {
         label: 'Emplacement',
         initialValue: '',
@@ -61,35 +46,38 @@ const pompeChaleurCongfig = () => {
         type: 'select', // Input type
         options: locationsOptions,
       },
-      equipment_brand_id,
+      nfc_tag_id,
+      equipment_brand_id: { ...brandIds, options: equipmentBrandsOptions },
+      equipment_model,
+      serial_number,
+      finalites,
+      installation_date,
+    },
+    4: {
+      // equipment_type_id, visibiltiy
+      // equipment_brand_id,
+      nfc_tag_id,
+      equipment_brand_id: { ...brandIds, options: equipmentBrandsOptions },
+      unite_exterieur_type_id: {
+        ...unite_exterieur_type_id,
+        visibleWhen: (values: Record<string, any>) =>
+          values.equipment_type_id === '13' ||
+          values.equipment_type_id === '14',
+      },
       equipment_model,
       serial_number,
       finalites: {
-        label: 'Finalité(s)',
-        // initialValue: false,
-        // validationSchema: Yup.boolean().required('Finalité requis'),
-        type: 'multicheck', // Input type
-        options: [
-          {
-            value: false,
-            label: `Plancher chauffant`,
-            name: 'is_plancher_chauffant',
-          },
-          {
-            value: false,
-            label: `Plancher chauffant/raffraichssant`,
-            name: 'is_plancher_raffraichssant',
-          },
-          { value: false, label: `Radiaterus`, name: 'is_radiateurs' },
-          {
-            value: false,
-            label: `Ventilo-convecteurs`,
-            name: 'ventilo_convecteurs',
-          },
-        ],
+        ...finalites,
+        visibleWhen: (values: Record<string, any>) =>
+          values.equipment_type_id === '11' ||
+          values.equipment_type_id === '12',
       },
+      gas_type_id: { ...gas_type_id, options: gas_types_options },
+      gas_weight,
+      has_leak_detection,
+      leak_detection_periodicity,
+      installation_date,
     },
-    4: {},
   };
 };
 

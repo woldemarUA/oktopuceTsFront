@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useSites } from '../../context/SitesProvider';
 
-import { parametrageFormConfig } from '../../components/forms/config/parametrageFromConfig';
+import { parametrageFormConfig } from './equipmentConfigs/parametrageFromConfig';
 
 import FormFin from '../../components/forms/FormFin';
 
@@ -46,16 +46,16 @@ const Parametrage = () => {
         />
       ) : (
         <Informations
-          equipment_type={formValues.equipment_type || 'default_type'}
-          endroit={formValues.endroit || 'default_endroit'}
-          equipment_type_id={formValues.equipment_type_id || 'default_id'}
           header='Informations'
+          formValues={formValues}
         />
       )}
-      {/* <MultiFormNavButtons
+      <MultiFormNavButtons
         currentStep={step}
+        step={2}
         handleStepBtnClick={setStep}
-      /> */}
+        setStepBtnTitle={(step) => step}
+      />
     </>
   );
 };

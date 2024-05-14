@@ -36,6 +36,7 @@ interface MyFormProps {
   multiStep?: boolean;
   multiConf?: Record<string | number, any>;
   containerStyle?: boolean;
+  formValues?: Record<string, any>;
 }
 
 // Composant de formulaire générique qui accepte toute configuration de formulaire.
@@ -46,18 +47,22 @@ const FormFin: React.FC<MyFormProps> = ({
   multiStep = false,
   multiConf = {},
   containerStyle = true,
+  formValues,
 }) => {
   const [message, setMessage] = useState<string>('');
   const [submissionSuccess, setSubmissionSuccess] = useState<boolean>(false);
-
-  const initialValues = useMemo(
-    () =>
-      Object.keys(formFieldConfig).reduce<Record<string, any>>((acc, key) => {
+  // console.log(formValues);
+  const initialValues = useMemo(() => {
+    let inVal = Object.keys(formFieldConfig).reduce<Record<string, any>>(
+      (acc, key) => {
         acc[key] = formFieldConfig[key].initialValue; // Configuration des valeurs initiales basées sur la configuration passée.
         return acc;
-      }, {}),
-    [formFieldConfig]
-  );
+      },
+      {}
+    );
+    if (formValues) inVal = { ...inVal, ...formValues };
+    return inVal;
+  }, [formFieldConfig]);
 
   const validationSchema = useMemo(
     () =>

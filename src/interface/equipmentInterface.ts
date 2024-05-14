@@ -1,5 +1,5 @@
 export default interface EquipmentInterface {
-  id: number; // Not optional since it's not nullable and has an auto-increment
+  id: number;
   parent_equipment_id: number | null;
   site_id: number;
   location_id: number;
@@ -40,6 +40,7 @@ export interface EquipmentFormValues {
   unite_exterieur_type_id: number;
   equipment_model: string;
   leak_detection_periodicity: string;
+  ballon_capacite: string;
   // fin n'xsiste dans le api
   endroit: string;
   installation_date: string; // Using string to represent datetime

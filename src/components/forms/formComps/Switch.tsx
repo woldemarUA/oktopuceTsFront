@@ -22,8 +22,8 @@ const Switch = ({ id, name, label }: SwitchProps) => {
   return (
     <div className={styles.row}>
       <div className={styles.columnSmall}> {label}</div>
-      <div className={`${styles.columnBig} items-center`}>
-        <div className='flex items-center'>
+      <div className={`${styles.columnBig} `}>
+        <div className='flex items-center justify-end'>
           <label
             htmlFor={`${id}`}
             className='relative inline-block w-14 h-8 bg-gray-200 rounded-full cursor-pointer'>
