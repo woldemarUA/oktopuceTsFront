@@ -7,7 +7,6 @@ import FormComponent from './FormComponent';
 
 import MultiFormNavButtons from './MultiFormNavButtons';
 
-import { styles } from '../../../styles/formStyles';
 import globalStyles from '../../../styles/globalStyles';
 
 const BUTTONS_PATH = `${import.meta.env.VITE_APP_ASSETS_PATH}/images/buttons/`;
@@ -28,7 +27,7 @@ const MultiStep: React.FC<MultiStepProps> = ({
   const [step, setStep] = useState<number>(1);
   const [isCurrentStepValid, setIsCurrentStepValid] = useState<boolean>(false);
 
-  const { validateForm, values } = useFormikContext();
+  const { validateForm, values } = useFormikContext<Record<string, any>>();
 
   const stepValidation = async (): Promise<boolean> => {
     const formErrors: Record<string, any> = await validateForm();
@@ -105,19 +104,6 @@ const MultiStep: React.FC<MultiStepProps> = ({
       </FormComponent>
       <div className='flex justify-around gap-x-2 py-1 px-2 '>
         {steps.map((s) => (
-          // <div
-          //   key={s}
-          //   className={styles.columnSmall}>
-          //   <span
-          //     className={
-          //       step === parseInt(s, 10)
-          //         ? globalStyles.roundedBtnActive
-          //         : globalStyles.roundedBtnDisabled
-          //     }
-          //     onClick={() => handleStepBtnClick(parseInt(s, 10))}>
-          //     {setStepBtnTitle(parseInt(s, 10))}
-          //   </span>
-          // </div>
           <MultiFormNavButtons
             key={s}
             currentStep={parseInt(s, 10)}

@@ -1,6 +1,6 @@
 // clientsFormConfig.ts
 import * as Yup from 'yup';
-import { ClientFormValues } from '../../../interface/clientsInterface';
+import { ClientFormValues } from '../../../../interface/clientsInterface';
 
 export const clientsFormConfig = {
   language: {

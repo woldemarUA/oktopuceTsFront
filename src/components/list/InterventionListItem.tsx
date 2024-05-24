@@ -10,8 +10,8 @@ import globalStyles from '../../styles/globalStyles';
 const InterventionListItem: React.FC<InterventionListItemProps> = ({
   item,
 }) => {
-  const { company_name, site_name, technician_name, answers, site } = item;
-
+  const { company_name, site_name, technician_name, answers } = item;
+  console.log(item);
   return (
     <>
       <div className={styles.listCol}>
@@ -26,7 +26,7 @@ const InterventionListItem: React.FC<InterventionListItemProps> = ({
         </p>
         <p className={styles.listCell}>
           <span className={styles.label}>Nom du Site : </span>
-          {site_name || site}
+          {site_name}
         </p>
       </div>
       <div className={styles.listCol}>

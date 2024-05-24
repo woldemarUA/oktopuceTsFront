@@ -3,6 +3,8 @@ import React from 'react';
 const BUTTONS_PATH = `${import.meta.env.VITE_APP_ASSETS_PATH}/images/buttons/`;
 
 import styles from '../styles/listStyles';
+
+import globalStyles from '../styles/globalStyles';
 interface AccordionProps {
   title: string;
   children: React.ReactNode;
@@ -19,7 +21,7 @@ export const Accordion: React.FC<AccordionProps> = ({
   id,
 }) => {
   return (
-    <div>
+    <div className={globalStyles.row}>
       <button onClick={() => toggleAccordion(id)}>
         <div className={styles.listItemSpread}>
           <div>{title}</div>

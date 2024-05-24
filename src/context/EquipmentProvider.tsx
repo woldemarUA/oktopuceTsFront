@@ -6,9 +6,11 @@ import {
   ReactNode,
 } from 'react';
 
-import EquipmentInterface, {
+import { EquipmentInterface } from '../interface/equipment_interface';
+
+import {
+  //EquipmentInterface,
   EquipmentLocationsInterface,
-  EquipmentFormValues,
   EquipmentBrandsInterface,
 } from '../interface/equipmentInterface';
 

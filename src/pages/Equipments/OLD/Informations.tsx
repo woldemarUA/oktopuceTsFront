@@ -3,14 +3,16 @@ import EquipmentItem from './EquipmentItem';
 import {
   endroit_mapping,
   equipment_type_id_mapping,
-} from './equipmentConfigs/parametrageFromConfig';
+} from '../equipmentConfigs/parametrageFromConfig';
 
 type InformationsProps = {
   header: string;
   formValues: Record<string, any>;
 };
 
-import globalStyles from '../../styles/globalStyles';
+import FormFin from '../../../components/forms/FormFin';
+
+import globalStyles from '../../../styles/globalStyles';
 
 const Informations = ({ header, formValues }: InformationsProps) => {
   const { equipment_type, endroit, equipment_type_id } = formValues;
@@ -36,11 +38,12 @@ const Informations = ({ header, formValues }: InformationsProps) => {
       <div className={globalStyles.row}>
         <h2 className={globalStyles.header}>{header}</h2>
       </div>
-      <EquipmentItem
+      {/* <EquipmentItem
         titre={title}
         sousTitre={titreLabel}
         formValues={formValues}
-      />
+      /> */}
+      {/* <FormFin/> */}
     </div>
   );
 };

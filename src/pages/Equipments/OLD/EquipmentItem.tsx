@@ -1,11 +1,11 @@
-import climatisationConfig from './equipmentConfigs/climatisationConfig';
-import pompeChaleurCongfig from './equipmentConfigs/pompeChaleurCongfig';
-import thermodynamiqueConfig from './equipmentConfigs/thermodynamiqueConfig';
+import climatisationConfig from './climatisationConfig';
+import pompeChaleurCongfig from './pompeChaleurCongfig';
+import thermodynamiqueConfig from './thermodynamiqueConfig';
 
-import globalStyles from '../../styles/globalStyles';
+import globalStyles from '../../../styles/globalStyles';
 
-import FormFin from '../../components/forms/FormFin';
-import { styles } from '../../styles/formStyles';
+// import FormFin from '../../components/forms/FormFin';
+// import { styles } from '../../styles/formStyles';
 
 type configSchema = () => Record<number, any>;
 
@@ -47,7 +47,7 @@ const EquipmentItem = ({
   }
 
   const formOptions: FormOptions = formOptionsAll[parseInt(endroit, 10)];
-  console.log(formValues);
+
   return (
     <>
       <div className={globalStyles.imageRow}>
@@ -63,13 +63,13 @@ const EquipmentItem = ({
         </div>
       </div>
 
-      <FormFin
+      {/* <FormFin
         formFieldConfig={formOptions}
         containerStyle={false}
         title='Informations'
         handleSubmit={(values) => console.log(values)}
         formValues={formValues}
-      />
+      /> */}
     </>
   );
 };

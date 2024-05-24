@@ -1,16 +1,11 @@
 import * as Yup from 'yup';
 
-import { EquipmentFormValues } from '../../../interface/equipmentInterface';
+import { EquipmentFormValues } from '../../../interface/equipment_interface.ts';
 
 // regulates equipment_type_id visiblity
 export const chaleurEauOptions = ['1', '2', '4', '8'];
 
 // regulates equipment_type_id asignement (used in select Field) values.endroit
-export const eqTypeIdAssign: Record<string, string>[] = [
-  { endroit: '3', equipment_type_id: '10' },
-  { endroit: '6', equipment_type_id: '15' },
-  { endroit: '7', equipment_type_id: '16' },
-];
 
 export const endroit_mapping = new Map([
   [
@@ -117,15 +112,16 @@ export const parametrageFormConfig = {
     options: (values: Record<string, any>) => {
       return endroit_mapping.get(parseInt(values.equipment_type, 10));
     },
+    visibleWhen: (values: EquipmentFormValues) => values.equipment_type,
   },
   equipment_type_id: {
     label: "Type d'unite?",
     initialValue: '',
     validationSchema: Yup.number().required(' Type requis').integer(),
     visibleWhen: (values: EquipmentFormValues) =>
-      chaleurEauOptions.includes(values.endroit),
+      values.equipment_type && chaleurEauOptions.includes(values.endroit),
     type: 'select', // Input type
-    options: (values: Record<string, any>) => {
+    options: (values: EquipmentFormValues) => {
       return equipment_type_id_mapping.get(
         `${values.equipment_type}${values.endroit}`
       );

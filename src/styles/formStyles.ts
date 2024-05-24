@@ -1,6 +1,6 @@
 export const styles = {
   form: 'space-y-4 max-w-xl mx-auto p-5 border border-gray-200 rounded-md shadow-sm',
-  row: 'grid grid-cols-4 gap-2 items-center',
+  row: 'grid grid-cols-4 gap-2 items-center  ',
   rowImageLabelOption: 'grid grid-cols-5 gap-2 items-center',
   columnSmall: 'col-span-1  p-1',
   columnBig: 'col-span-3  p-1 ',

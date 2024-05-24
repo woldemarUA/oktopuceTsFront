@@ -15,7 +15,7 @@ import {
   convertToOptions,
   installation_date,
   nfc_tag_id,
-} from './equipmentConfigSharedFields';
+} from '../equipmentConfigs/equipmentConfigSharedFields';
 
 const pompeChaleurCongfig = () => {
   const { equipmentLocations, equipmentBrands, gas_types } = useEquipments();

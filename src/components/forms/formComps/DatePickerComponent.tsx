@@ -22,7 +22,7 @@ const DatePickerComponent = ({ label, name }: DatePickerComponentProps) => {
       <div className={styles.columnSmall}>{label} </div>
       <div className={styles.columnBig}>
         <DatePicker
-          className='bg-stone-800'
+          className={styles.input}
           closeOnScroll={(e) => e.target === document}
           selected={startDate}
           dateFormat='yyyy-MM-dd'

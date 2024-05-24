@@ -1,5 +1,21 @@
 import * as Yup from 'yup';
 
+// export interface FormConfigRecord {
+//   label: string;
+//   initialValue: string | number;
+//   type: string;
+//   validationSchema: Record<string, any>;
+//   options?: { value: string | number; label: string }[];
+// }
+
+export interface FormConfigProps {
+  label: string;
+  initialValue: string | number;
+  type: string;
+  validationSchema: Record<string, any>;
+  options?: { value: string | number; label: string }[];
+}
+
 export const brandIds = {
   label: 'Marque',
   initialValue: '',

@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { useSites } from '../../context/SitesProvider';
+import { useSites } from '../../../context/SitesProvider';
 
-import { parametrageFormConfig } from './equipmentConfigs/parametrageFromConfig';
+import { parametrageFormConfig } from '../equipmentConfigs/parametrageFromConfig';
 
-import FormFin from '../../components/forms/FormFin';
+import FormFin from '../../../components/forms/FormFin';
 
 import Informations from './Informations';
 
-import MultiFormNavButtons from '../../components/forms/formComps/MultiFormNavButtons';
+import EquipmentConfigurator from '../EquipmentConfigurator';
 
 const Parametrage = () => {
   const [step, setStep] = useState<number>(0);
@@ -28,6 +28,8 @@ const Parametrage = () => {
     },
   };
 
+  console.log(formConf);
+
   const onSubmit = async (
     values: Record<string, any>
   ): Promise<Record<string, any>> => {
@@ -45,17 +47,18 @@ const Parametrage = () => {
           handleSubmit={onSubmit}
         />
       ) : (
-        <Informations
-          header='Informations'
-          formValues={formValues}
-        />
+        // <Informations
+        //   header='Informations'
+        //   formValues={formValues}
+        // />
+        <EquipmentConfigurator />
       )}
-      <MultiFormNavButtons
+      {/* <MultiFormNavButtons
         currentStep={step}
         step={2}
         handleStepBtnClick={setStep}
         setStepBtnTitle={(step) => step}
-      />
+      /> */}
     </>
   );
 };

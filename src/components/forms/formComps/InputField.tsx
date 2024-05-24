@@ -20,7 +20,7 @@ interface InputFieldProps {
 const InputField: React.FC<InputFieldProps> = ({ label, type, name }) => {
   const [isLeak, setIsLeak] = useState<boolean>(false);
   const [leakValue, setLeakValue] = useState<string>('');
-  const { setFieldValue, values } = useFormikContext();
+  const { setFieldValue, values } = useFormikContext<Record<string, any>>();
 
   const { gas_types } = useEquipments();
 
@@ -40,6 +40,14 @@ const InputField: React.FC<InputFieldProps> = ({ label, type, name }) => {
       setFieldValue(name, periodicity);
     }
   }, [values.gas_type_id, values.has_leak_detection, values.gas_weight]);
+  useEffect(() => {
+    if (name === 'soufflage_delta') {
+      const soufflage_delta = values.soufflage_relevee - values.reprise_relevee;
+      setIsLeak(true);
+      setLeakValue(`${soufflage_delta}`);
+      setFieldValue(name, soufflage_delta);
+    }
+  }, [values.soufflage_relevee, values.reprise_relevee]);
 
   return (
     <div className={styles.row}>
@@ -56,6 +64,7 @@ const InputField: React.FC<InputFieldProps> = ({ label, type, name }) => {
               name={name}
               type={type || 'text'}
               as={type === 'select' ? 'select' : 'input'}
+              value={values[name] || ''} // Ensure the value is always defined
             />{' '}
             <ErrorMessage
               name={name}

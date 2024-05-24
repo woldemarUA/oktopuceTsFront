@@ -1,7 +1,7 @@
 // clientsFormConfig.ts
 import * as Yup from 'yup';
 
-import { SitesFormValues } from '../../../interface/sitesInterface';
+import { SitesFormValues } from '../../../../interface/sitesInterface';
 
 export const SitesFormConfig = {
   client_id: {

@@ -7,9 +7,12 @@ const BASE_PATH: string = import.meta.env.VITE_API_PATH;
 
 export const addSite = async (siteData: SitesInterface) => {
   try {
-    await axios.post(`${BASE_PATH}/sites`, siteData);
-
-    return { msg: 'Site  était ajouté avec succès' };
+    const response = await axios.post(`${BASE_PATH}/sites`, siteData);
+    console.log(response.data);
+    return {
+      msg: 'Site  était ajouté avec succès',
+      addedItem: response.data.data,
+    };
   } catch (err) {
     console.error(err);
     if (axios.isAxiosError(err)) {

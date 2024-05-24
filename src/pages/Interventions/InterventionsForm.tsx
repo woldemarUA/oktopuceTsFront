@@ -1,37 +1,31 @@
-import UniteImage from '../../assets/misc/uniteImage.png';
+// import intervFromComponentConfig from '../../components/forms/config/intervFromComponentConfig';
+// import intervFromComponentConfig from '../../components/forms/config/interventionsFormComponentEasyConf';
 
-import { InterventionsFormConfig } from '../../components/forms/config/interventionsFormConfig';
+import interventionsFormConfigFin from './formConfig/interventionsFormConfigFin';
+
 import FormFin from '../../components/forms/FormFin';
 
-import { useSites } from '../../context/SitesProvider';
 import { useInterventions } from '../../context/InterventionsProvider';
 
 import { formStepsConvertor } from '../../utilities/convertors';
 
 const InterventionsForm: React.FC = () => {
-  const { sites } = useSites();
-
+  // const initialConf = intervFromComponentConfig();
+  const initialConf = interventionsFormConfigFin();
+  // console.log(initialConf);
   const { handleAddIntervention } = useInterventions();
-  const formConf = formStepsConvertor(InterventionsFormConfig);
 
-  const sitesOptions = sites.map((site) => ({
-    value: site.id,
-    label: site.name,
-  }));
-  formConf.site_id.options = [
-    { value: '', label: 'choissisez' },
-    ...sitesOptions,
-  ];
+  // convertir mulitstep dans le configration pour FormFin
+  const formConf: Record<string, any> = formStepsConvertor(initialConf);
 
   return (
     <>
-      {/* <img src={UniteImage} /> */}
       <FormFin
         title='Ajout Intervention'
-        formFieldConfig={formConf}
+        formFieldConfig={initialConf}
         handleSubmit={(values: any) => handleAddIntervention(values)}
-        multiStep={true}
-        multiConf={InterventionsFormConfig}
+        // multiStep={true}
+        // multiConf={initialConf}
       />
     </>
   );

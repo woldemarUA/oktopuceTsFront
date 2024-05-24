@@ -1,12 +1,15 @@
-import { clientsFormConfig } from '../../components/forms/config/clientFormConfig';
+import clientFormComponentConfig from '../../components/forms/config/clientFormComponentConfig';
+
 import FormFin from '../../components/forms/FormFin';
 import { useClients } from '../../context/ClientsProvider';
 
 const ClientsForm = () => {
   const { handleAddClient } = useClients();
+
+  const formConf = clientFormComponentConfig();
   return (
     <FormFin
-      formFieldConfig={clientsFormConfig}
+      formFieldConfig={formConf}
       title='Ajout Client'
       handleSubmit={handleAddClient}
     />

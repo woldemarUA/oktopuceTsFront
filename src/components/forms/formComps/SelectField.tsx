@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useCallback, useMemo } from 'react';
 
 import {
   Field, // Importation du composant Field pour créer des champs de formulaire.
@@ -9,13 +9,15 @@ import {
 import globalStyles from '../../../styles/globalStyles';
 import { styles } from '../../../styles/formStyles';
 
-import { eqTypeIdAssign } from '../../../pages/Equipments/equipmentConfigs/parametrageFromConfig';
+import { eqTypeId } from '../../../pages/Equipments/equipmentConfigs/parametrageConfComp';
 
-const PICTO_PATH = `${import.meta.env.VITE_APP_ASSETS_PATH}/images/picto`;
+import { useForms } from '../../../context/FormContextProvider';
 
 export interface Option {
   value: string | number; // La valeur de l'option.
   label: string; // Le label de l'option.
+  from: string;
+  to: string;
 }
 
 interface SelectFieldProps {
@@ -23,7 +25,11 @@ interface SelectFieldProps {
   options: Option[];
   type: string;
   label: string;
-  image: boolean;
+  children?: React.ReactNode;
+  from: string;
+  isAdd: boolean;
+  isAddSetter: (isAdd: boolean) => void;
+  //  stepTrace
 }
 
 const SelectField: React.FC<SelectFieldProps> = ({
@@ -31,55 +37,74 @@ const SelectField: React.FC<SelectFieldProps> = ({
   options,
   type,
   name,
-  image,
+  isAdd,
+  isAddSetter,
 }) => {
-  const [selectedImage, setSelectedImage] = useState<string>();
-  const [isImage, setIsImage] = useState<boolean>(image);
-  const [currentEndroit, setCurrentEndroit] = useState<string | null>(null);
-
   const { setFieldValue, values } = useFormikContext<Record<string, any>>();
+  const { optionAddStep, setOptionAddStep, handleAddOption } = useForms();
 
   useEffect(() => {
-    setCurrentEndroit(values.endroit);
-  }, [values.endroit]);
+    Object.keys(eqTypeId).includes(values.endroit) &&
+      setFieldValue('equipment_type_id', eqTypeId[values.endroit]);
+  }, [setFieldValue, values.endroit]);
 
-  useEffect(() => {
-    let isEndroitMatch = false;
-    if (currentEndroit !== values.endroit) {
-      setIsImage(false);
-      setSelectedImage(undefined);
-    }
-    for (const obj of eqTypeIdAssign) {
-      if (values.endroit === obj.endroit) {
-        isEndroitMatch = true;
-        setFieldValue('equipment_type_id', obj.equipment_type_id);
+  // const onSelectChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+  //   const value = e.target.value;
+  //   if (value === 'add') {
+  //     const from = options.filter((option) => option.value === 'add');
+
+  //     setAddOptionStep((prevStep) => prevStep + 1);
+  //     console.log(addOptionStep);
+  //     handleAddOption(name, from[0].to, from[0].from);
+  //   } else {
+  //     setFieldValue(name, value);
+  //   }
+  // };
+
+  // const memoizedOptions = useMemo(() => options, [options]);
+  const onSelectChange = useCallback(
+    (e: React.ChangeEvent<HTMLSelectElement>) => {
+      const value = e.target.value;
+      if (value === 'add') {
+        const from = options.filter((option) => option.value === 'add');
+
+        const newStep = optionAddStep + 1;
+
+        handleAddOption({
+          name,
+          to: from[0].to,
+          from: from[0].from,
+          // newStep,
+          newStep,
+        });
+        isAddSetter(!isAdd);
+        setOptionAddStep(newStep);
+      } else {
+        setFieldValue(name, value);
       }
-    }
-
-    if (isEndroitMatch && name === 'endroit') {
-      setIsImage(true);
-    } else {
-      setIsImage(image);
-    }
-  }, [values.endroit, name, image, setFieldValue, currentEndroit]);
-
-  useEffect(() => {
-    if (values.equipment_type_id) {
-      setSelectedImage(`${PICTO_PATH}/${values.equipment_type_id}.png`);
-    }
-  }, [values.equipment_type_id]);
+    },
+    [
+      setFieldValue,
+      options,
+      //memoizedOptions,
+      name,
+      handleAddOption,
+    ]
+  );
 
   return (
     <>
       <div className={styles.row}>
         <div className={styles.columnSmall}>{label}</div>
+
         <div className={styles.columnBig}>
           <Field
             className={styles.select}
             name={name}
             as={type}
             label={label}
-            options={options}>
+            options={options}
+            onChange={onSelectChange}>
             {options.map((option: Option) => (
               <option
                 key={option.value}
@@ -95,17 +120,6 @@ const SelectField: React.FC<SelectFieldProps> = ({
           />
         </div>
       </div>
-      {isImage && selectedImage && (
-        <div className='grid grid-cols-2 gap-4 place-content-center'>
-          <p className={`${styles.columnSmall} content-center`}>Visuel</p>
-          <img
-            className={`content-center`}
-            src={selectedImage}
-            alt='Selected'
-          />
-          {/* <div className={globalStyles.imgLabelCell}></div> */}
-        </div>
-      )}
     </>
   );
 };

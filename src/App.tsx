@@ -29,6 +29,16 @@ const App: React.FC = () => {
                 element={<Intro />}
                 caseSensitive={true}
               />
+              {/* <Route
+                path='/add-option'
+                element={
+                  <AddOption
+                    to={'Sites'}
+                    from={'Equipment'}
+                  />
+                }
+                caseSensitive={true}
+              /> */}
               {clientRoutes.map((route) => (
                 <Route
                   key={route.path}

@@ -14,7 +14,9 @@ import {
   convertToOptions,
   installation_date,
   nfc_tag_id,
-} from './equipmentConfigSharedFields';
+} from '../equipmentConfigs/equipmentConfigSharedFields';
+
+import parametrageConfComp from '../equipmentConfigs/parametrageConfComp';
 
 const climatisationConfig = () => {
   const { equipmentLocations, equipmentBrands, gas_types } = useEquipments();
@@ -22,9 +24,11 @@ const climatisationConfig = () => {
   const equipmentBrandsOptions = convertToOptions(equipmentBrands);
   const locationsOptions = convertToOptions(equipmentLocations);
   const gas_types_options = convertToOptions(gas_types);
+  const parametrageStart = parametrageConfComp();
 
   return {
-    1: {
+    1: parametrageStart,
+    2: {
       location_id: {
         label: 'Emplacement',
         initialValue: '',
@@ -54,7 +58,7 @@ const climatisationConfig = () => {
       remote_control_number,
       installation_date,
     },
-    2: {
+    3: {
       nfc_tag_id,
       equipment_brand_id: { ...brandIds, options: equipmentBrandsOptions },
       unite_exterieur_type_id: {

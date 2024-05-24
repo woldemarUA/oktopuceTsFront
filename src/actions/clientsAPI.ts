@@ -9,8 +9,13 @@ const BASE_PATH: string = import.meta.env.VITE_API_PATH;
 
 export const addClient = async (userInfo: ClientFormValues) => {
   try {
-    await axios.post(`${BASE_PATH}/clients`, userInfo);
-    return { msg: 'Client était ajouté avec succès' };
+    const response = await axios.post(`${BASE_PATH}/clients`, userInfo);
+    // console.log(response.data.data);
+    return {
+      msg: 'Client était ajouté avec succès',
+
+      addedItem: response.data.data,
+    };
   } catch (err) {
     console.error(err);
     if (axios.isAxiosError(err)) {
@@ -28,6 +33,7 @@ export const fetchClients = async (): Promise<ClientsInterface[]> => {
     const response = await axios.get<ClientsInterface[]>(
       `${BASE_PATH}/clients`
     );
+    console.log(response.data);
     return response.data.data;
   } catch (err) {
     console.error(err);

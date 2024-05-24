@@ -13,7 +13,7 @@ import {
   convertToOptions,
   installation_date,
   nfc_tag_id,
-} from './equipmentConfigSharedFields';
+} from '../equipmentConfigs/equipmentConfigSharedFields';
 
 const thermodynamiqueConfig = () => {
   const { equipmentBrands, gas_types } = useEquipments();
