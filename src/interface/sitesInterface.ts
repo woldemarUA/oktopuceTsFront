@@ -14,6 +14,11 @@ export default interface SitesInterface {
     main_telephone: string | undefined;
     main_mail: string | undefined;
   } | null;
+  clientContactName: string | undefined;
+  clientEmail: string;
+  clientFirstName: string;
+  clientPhone: string;
+  clientSecondName: string | undefined;
 }
 
 export interface SitesFormValues {

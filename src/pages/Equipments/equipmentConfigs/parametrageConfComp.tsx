@@ -137,10 +137,12 @@ export const equipment_type_id = {
 function parametrageConfComp() {
   const { sites } = useSites();
 
-  const sitesOptions = sites.map((site: Record<string, any>) => ({
-    value: site.id,
-    label: `${site.name}`,
-  }));
+  const sitesOptions = sites.map((site: Record<string, any>) => {
+    return {
+      value: site.id,
+      label: `${site.name}`,
+    };
+  });
 
   const formConf = {
     site_id: {

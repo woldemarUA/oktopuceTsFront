@@ -1,39 +1,20 @@
 import axios from 'axios';
 
-import EquipmentInterface from '../interface/equipmentInterface';
-
-interface EquipmentBrand {
-  id: number;
-  name: string;
-  created_at: null | string;
-  updated_at: null | string;
+export interface Option {
+  value: number;
+  label: string;
 }
 
-interface EquipmentBrandsResponse {
-  data: EquipmentBrand[];
-  links: {
-    first: string;
-    last: string;
-    prev: string | null;
-    next: string | null;
-  };
+export interface GasTypeInterface extends Option {
+  potentiel: string;
 }
 
-interface EquipmentLocationsInterface {
-  id: number;
-  name: string;
-}
+const BASE_PATH: string = import.meta.env.VITE_API_PATH;
 
-const BASE_PATH = import.meta.env.VITE_API_EQUIPMENTS_PATH;
-
-const LAVAREL_PATH = import.meta.env.VITE_API_PATH;
-
-export const fetchEquipmentLocations = async (): Promise<
-  EquipmentLocationsInterface[]
-> => {
+export const fetchEquipmentLocations = async (): Promise<Option[]> => {
   try {
-    const response = await axios.get<EquipmentLocationsInterface[]>(
-      `${BASE_PATH}/equipment_locations.json`
+    const response = await axios.get<Option[]>(
+      `${BASE_PATH}equipments/locations`
     );
     return response.data;
   } catch (err) {
@@ -48,22 +29,37 @@ export const fetchEquipmentLocations = async (): Promise<
   }
 };
 
-export const fetchEqBrands = async (): Promise<EquipmentBrand[]> => {
+export const fetchEqBrands = async (): Promise<Option[]> => {
   try {
-    let allBrands: EquipmentBrand[] = [];
-    let nextPageUrl = `${LAVAREL_PATH}/equipment-brands`;
-    while (nextPageUrl) {
-      const response = await axios.get<EquipmentBrandsResponse[]>(nextPageUrl);
-      allBrands = allBrands.concat(response.data.data);
-      nextPageUrl = response.data.links.next || null;
-    }
+    const response = await axios.get<Option[]>(`${BASE_PATH}equipments/brands`);
+    const brands = response.data;
 
-    return allBrands;
+    return brands;
   } catch (err) {
     console.error(err);
     if (axios.isAxiosError(err)) {
       throw new Error(
         `La récupération des equipment brands a échoué avec le statut: ${err.response?.status}`
+      );
+    } else {
+      throw new Error('Une erreur inattendue est apparue');
+    }
+  }
+};
+
+export const fetchgasTypes = async (): Promise<GasTypeInterface[]> => {
+  try {
+    const response = await axios.get<GasTypeInterface[]>(
+      `${BASE_PATH}equipments/gas-types`
+    );
+    const gasTypes = response.data;
+
+    return gasTypes;
+  } catch (err) {
+    console.error(err);
+    if (axios.isAxiosError(err)) {
+      throw new Error(
+        `La récupération des equipment gasTypes a échoué avec le statut: ${err.response?.status}`
       );
     } else {
       throw new Error('Une erreur inattendue est apparue');

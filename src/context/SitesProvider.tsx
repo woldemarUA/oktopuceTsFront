@@ -11,11 +11,10 @@ import SitesInterface from '../interface/sitesInterface';
 import { SitesFormValues } from '../interface/sitesInterface';
 
 import { fetchSites, addSite, getSiteById } from '../actions/sitesAPI';
-import { number } from 'yup';
 
 interface SitesContextType {
   sites: SitesInterface[];
-  site: SitesInterface | null;
+
   getSites: () => Promise<void>;
   getSiteById: (id: number) => Promise<SitesInterface | null>;
   handleAddSite: (clientData: SitesFormValues) => Promise<{ msg: string }>;
@@ -24,7 +23,7 @@ interface SitesContextType {
 
 const DefaultContextValue: SitesContextType = {
   sites: [],
-  site: null,
+
   getSites: async () => {},
   getSiteById: async (id: number) => {
     return null;
@@ -45,7 +44,7 @@ const SitesContext = createContext<SitesContextType>(DefaultContextValue);
 
 const SitesProvider: React.FC<SitesProviderProps> = ({ children }) => {
   const [sites, setSites] = useState<SitesInterface[]>([]);
-  const [site, setSite] = useState<SitesInterface | null>(null);
+
   const [error, setError] = useState<Error | null>(null);
   const [fetchFlag, setFetchFlag] = useState(false);
 
@@ -53,7 +52,7 @@ const SitesProvider: React.FC<SitesProviderProps> = ({ children }) => {
     try {
       const sitesData = await fetchSites();
       setSites(sitesData);
-      setSite(sitesData[0]);
+      // setSite(sitesData[0]);
     } catch (err) {
       console.error(err);
       setError(
@@ -101,7 +100,7 @@ const SitesProvider: React.FC<SitesProviderProps> = ({ children }) => {
   }, [fetchFlag]);
   return (
     <SitesContext.Provider
-      value={{ sites, site, getSites, handleAddSite, getSiteById, error }}>
+      value={{ sites, getSites, handleAddSite, getSiteById, error }}>
       {children}
     </SitesContext.Provider>
   );

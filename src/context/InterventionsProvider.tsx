@@ -68,13 +68,13 @@ const InterventionsProvider: React.FC<InterventionsProviderProps> = ({
 
       setInterventions(interventionsData);
 
-      setIntervention(interventionsData[0] || null);
+      // setIntervention(interventionsData[0] || null);
     } catch (err) {
       console.error(err);
       setError(
         err instanceof Error
           ? err
-          : new Error('Échec de la récupération des clients')
+          : new Error('Échec de la récupération des interventions')
       );
     } finally {
       setFetchFlag(false);

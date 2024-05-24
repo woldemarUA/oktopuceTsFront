@@ -1,13 +1,5 @@
 import * as Yup from 'yup';
 
-// export interface FormConfigRecord {
-//   label: string;
-//   initialValue: string | number;
-//   type: string;
-//   validationSchema: Record<string, any>;
-//   options?: { value: string | number; label: string }[];
-// }
-
 export interface FormConfigProps {
   label: string;
   initialValue: string | number;
@@ -73,7 +65,7 @@ export const remote_control_number = {
 export const gas_type_id = {
   label: 'Type de gaz',
   initialValue: '',
-  validationSchema: Yup.number().required('Emplacement requis').integer(),
+  validationSchema: Yup.number().required('Gas type requis').integer(),
   type: 'select', // Input type
   // options: gas_types_options,
 };
@@ -148,18 +140,18 @@ export const nfc_tag_id = {
   type: 'number',
 };
 
-export const convertToOptions = (options: Record<string, any>[]) => {
-  return [
-    { value: '', label: 'Choissisez' },
-    ...options.map((option) => {
-      const optionFin: Record<string, string | number> = {};
-      optionFin.value = option.id;
-      optionFin.label = option.name;
-      if (option?.global_warming_potential !== undefined) {
-        optionFin.potentiel = option.global_warming_potential;
-      }
-      // return { value: option.id, label: option.name };
-      return optionFin;
-    }),
-  ];
-};
+// export const convertToOptions = (options: Record<string, any>[]) => {
+//   return [
+//     { value: '', label: 'Choissisez' },
+//     ...options.map((option) => {
+//       const optionFin: Record<string, string | number> = {};
+//       optionFin.value = option.id;
+//       optionFin.label = option.name;
+//       if (option?.global_warming_potential !== undefined) {
+//         optionFin.potentiel = option.global_warming_potential;
+//       }
+//       // return { value: option.id, label: option.name };
+//       return optionFin;
+//     }),
+//   ];
+// };

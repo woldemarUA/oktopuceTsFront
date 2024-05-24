@@ -11,7 +11,6 @@ import {
   gas_weight,
   has_leak_detection,
   leak_detection_periodicity,
-  convertToOptions,
   installation_date,
   nfc_tag_id,
 } from '../equipmentConfigs/equipmentConfigSharedFields';
@@ -21,9 +20,6 @@ import parametrageConfComp from '../equipmentConfigs/parametrageConfComp';
 const climatisationConfig = () => {
   const { equipmentLocations, equipmentBrands, gas_types } = useEquipments();
 
-  const equipmentBrandsOptions = convertToOptions(equipmentBrands);
-  const locationsOptions = convertToOptions(equipmentLocations);
-  const gas_types_options = convertToOptions(gas_types);
   const parametrageStart = parametrageConfComp();
 
   return {
@@ -34,7 +30,7 @@ const climatisationConfig = () => {
         initialValue: '',
         validationSchema: Yup.number().required('Emplacement requis').integer(),
         type: 'select', // Input type
-        options: locationsOptions,
+        options: [{ value: '', label: ' choissisez' }, ...equipmentLocations],
       },
       precisionCheck: {
         label: 'Précision',
@@ -52,7 +48,10 @@ const climatisationConfig = () => {
           values.precisionCheck === true,
       },
       nfc_tag_id,
-      equipment_brand_id: { ...brandIds, options: equipmentBrandsOptions },
+      equipment_brand_id: {
+        ...brandIds,
+        options: [{ value: '', label: ' choissisez' }, ...equipmentBrands],
+      },
       equipment_model,
       serial_number,
       remote_control_number,
@@ -60,7 +59,10 @@ const climatisationConfig = () => {
     },
     3: {
       nfc_tag_id,
-      equipment_brand_id: { ...brandIds, options: equipmentBrandsOptions },
+      equipment_brand_id: {
+        ...brandIds,
+        options: [{ value: '', label: ' choissisez' }, ...equipmentBrands],
+      },
       unite_exterieur_type_id: {
         label: 'Type',
         initialValue: '',
@@ -80,7 +82,10 @@ const climatisationConfig = () => {
       },
       equipment_model,
       serial_number,
-      gas_type_id: { ...gas_type_id, options: gas_types_options },
+      gas_type_id: {
+        ...gas_type_id,
+        options: [{ value: '', label: ' choissisez' }, ...gas_types],
+      },
       gas_weight,
       has_leak_detection,
       leak_detection_periodicity,

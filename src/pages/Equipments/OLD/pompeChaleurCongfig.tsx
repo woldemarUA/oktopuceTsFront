@@ -12,19 +12,12 @@ import {
   has_leak_detection,
   leak_detection_periodicity,
   unite_exterieur_type_id,
-  convertToOptions,
   installation_date,
   nfc_tag_id,
 } from '../equipmentConfigs/equipmentConfigSharedFields';
 
 const pompeChaleurCongfig = () => {
   const { equipmentLocations, equipmentBrands, gas_types } = useEquipments();
-
-  const equipmentBrandsOptions = convertToOptions(equipmentBrands);
-  const locationsOptions = convertToOptions(equipmentLocations);
-  const gas_types_options = convertToOptions(gas_types);
-
-  // const equipment_brand_id = { ...brandIds, options: equipmentBrandsOptions };
 
   return {
     3: {
@@ -44,10 +37,14 @@ const pompeChaleurCongfig = () => {
         initialValue: '',
         validationSchema: Yup.number().required('Emplacement requis').integer(),
         type: 'select', // Input type
-        options: locationsOptions,
+        options: [{ value: '', label: 'Choissisez' }, ...equipmentLocations],
       },
       nfc_tag_id,
-      equipment_brand_id: { ...brandIds, options: equipmentBrandsOptions },
+      equipment_brand_id: {
+        ...brandIds,
+        options: [{ value: '', label: 'Choissisez' }, ...equipmentBrands],
+      },
+
       equipment_model,
       serial_number,
       finalites,
@@ -57,7 +54,10 @@ const pompeChaleurCongfig = () => {
       // equipment_type_id, visibiltiy
       // equipment_brand_id,
       nfc_tag_id,
-      equipment_brand_id: { ...brandIds, options: equipmentBrandsOptions },
+      equipment_brand_id: {
+        ...brandIds,
+        options: [{ value: '', label: 'Choissisez' }, ...equipmentBrands],
+      },
       unite_exterieur_type_id: {
         ...unite_exterieur_type_id,
         visibleWhen: (values: Record<string, any>) =>
@@ -72,7 +72,10 @@ const pompeChaleurCongfig = () => {
           values.equipment_type_id === '11' ||
           values.equipment_type_id === '12',
       },
-      gas_type_id: { ...gas_type_id, options: gas_types_options },
+      gas_type_id: {
+        ...gas_type_id,
+        options: [{ value: '', label: 'Choissisez' }, ...gas_types],
+      },
       gas_weight,
       has_leak_detection,
       leak_detection_periodicity,

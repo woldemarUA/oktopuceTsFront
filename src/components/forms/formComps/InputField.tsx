@@ -26,13 +26,12 @@ const InputField: React.FC<InputFieldProps> = ({ label, type, name }) => {
 
   useEffect(() => {
     if (name === 'leak_detection_periodicity') {
-      const potentielArr = gas_types.filter(
-        (gas) => gas.id === parseInt(values.gas_type_id, 10)
-      );
-      const potentiel = potentielArr[0]?.global_warming_potential;
+      const potentiel =
+        gas_types[parseInt(values.gas_type_id, 10) - 1].potentiel;
+
       const periodicity = controleEtancheite(
         parseInt(values.gas_weight, 10),
-        potentiel,
+        parseInt(potentiel, 10),
         values.has_leak_detection
       );
       setIsLeak(true);

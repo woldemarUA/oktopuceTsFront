@@ -8,29 +8,20 @@ import {
 
 import { EquipmentInterface } from '../interface/equipment_interface';
 
-import {
-  //EquipmentInterface,
-  EquipmentLocationsInterface,
-  EquipmentBrandsInterface,
-} from '../interface/equipmentInterface';
+import { Option, GasTypeInterface } from '../actions/equipmentsAPI';
 
 //  API Calls
 import {
   fetchEquipmentLocations,
   fetchEqBrands,
+  fetchgasTypes,
 } from '../actions/equipmentsAPI';
-
-interface GasTypeInterface {
-  id: number;
-  name: string;
-  global_warming_potential: number;
-}
 
 interface EquipmentContextTypes {
   equipments: EquipmentInterface[];
   equipment: EquipmentInterface | null;
-  equipmentBrands: EquipmentBrandsInterface[];
-  equipmentLocations: EquipmentLocationsInterface[];
+  equipmentBrands: Option[];
+  equipmentLocations: Option[];
   gas_types: GasTypeInterface[];
   error: Error | null;
 }
@@ -51,29 +42,33 @@ interface EquipmentProviderProps {
 const EquipmentContext =
   createContext<EquipmentContextTypes>(DefaultContextValue);
 
-const gas_types_api = [
-  { id: 1, name: 'R-134A', global_warming_potential: 1430 },
-  { id: 2, name: 'R-22', global_warming_potential: 1810 },
-  { id: 3, name: 'R-407C', global_warming_potential: 1800 },
-  { id: 4, name: 'R-410A', global_warming_potential: 2100 },
-  { id: 5, name: 'R-32', global_warming_potential: 675 },
-];
-
 const EquipmentProvider = ({ children }: EquipmentProviderProps) => {
   // to change
 
-  const [gas_types, setGasTypes] = useState<GasTypeInterface[]>(gas_types_api);
+  const [gas_types, setGasTypes] = useState<GasTypeInterface[]>([]);
   // fin to change
   const [equipments, setEquipments] = useState<EquipmentInterface[]>([]);
   const [equipment, setEquipment] = useState<EquipmentInterface | null>(null);
-  const [equipmentBrands, setEquipmentBrands] = useState<
-    EquipmentBrandsInterface[]
-  >([]);
-  const [equipmentLocations, setEquipmentLocations] = useState<
-    EquipmentLocationsInterface[]
-  >([]);
+  const [equipmentBrands, setEquipmentBrands] = useState<Option[]>([]);
+  const [equipmentLocations, setEquipmentLocations] = useState<Option[]>([]);
   const [error, setError] = useState<Error | null>(null);
   const [fetchFlag, setFetchFlag] = useState(false);
+
+  const getGasTypes = async () => {
+    try {
+      const gas_types = await fetchgasTypes();
+      setGasTypes(gas_types);
+    } catch (err) {
+      console.error(err);
+      setError(
+        err instanceof Error
+          ? err
+          : new Error('Échec de la récupération des gast typse')
+      );
+    } finally {
+      setFetchFlag(false);
+    }
+  };
 
   const getEquipmentLocations = async () => {
     try {
@@ -106,6 +101,10 @@ const EquipmentProvider = ({ children }: EquipmentProviderProps) => {
       setFetchFlag(false);
     }
   };
+
+  useEffect(() => {
+    getGasTypes();
+  }, [fetchFlag]);
 
   useEffect(() => {
     getEqBrands();

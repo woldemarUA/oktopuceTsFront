@@ -10,7 +10,6 @@ import {
   has_leak_detection,
   leak_detection_periodicity,
   ballon_capacite,
-  convertToOptions,
   installation_date,
   nfc_tag_id,
 } from '../equipmentConfigs/equipmentConfigSharedFields';
@@ -18,17 +17,20 @@ import {
 const thermodynamiqueConfig = () => {
   const { equipmentBrands, gas_types } = useEquipments();
 
-  const equipmentBrandsOptions = convertToOptions(equipmentBrands);
-
-  const gas_types_options = convertToOptions(gas_types);
   return {
     6: {
       nfc_tag_id,
-      equipment_brand_id: { ...brandIds, options: equipmentBrandsOptions },
+      equipment_brand_id: {
+        ...brandIds,
+        options: [{ value: '', label: 'Choissisez' }, ...equipmentBrands],
+      },
       equipment_model,
       serial_number,
       ballon_capacite,
-      gas_type_id: { ...gas_type_id, options: gas_types_options },
+      gas_type_id: {
+        ...gas_type_id,
+        options: [{ value: '', label: 'Choissisez' }, ...gas_types],
+      },
       gas_weight,
       has_leak_detection,
       leak_detection_periodicity,
@@ -36,7 +38,10 @@ const thermodynamiqueConfig = () => {
     },
     7: {
       nfc_tag_id,
-      equipment_brand_id: { ...brandIds, options: equipmentBrandsOptions },
+      equipment_brand_id: {
+        ...brandIds,
+        options: [{ value: '', label: 'Choissisez' }, ...equipmentBrands],
+      },
       equipment_model,
       serial_number,
       ballon_capacite,
@@ -44,10 +49,16 @@ const thermodynamiqueConfig = () => {
     },
     8: {
       nfc_tag_id,
-      equipment_brand_id: { ...brandIds, options: equipmentBrandsOptions },
+      equipment_brand_id: {
+        ...brandIds,
+        options: [{ value: '', label: 'Choissisez' }, ...equipmentBrands],
+      },
       equipment_model,
       serial_number,
-      gas_type_id: { ...gas_type_id, options: gas_types_options },
+      gas_type_id: {
+        ...gas_type_id,
+        options: [{ value: '', label: 'Choissisez' }, ...gas_types],
+      },
       gas_weight,
       has_leak_detection,
       leak_detection_periodicity,

@@ -12,7 +12,6 @@ import {
   gas_weight,
   has_leak_detection,
   leak_detection_periodicity,
-  convertToOptions,
   finalites,
   ballon_capacite,
   installation_date,
@@ -31,11 +30,6 @@ const ballonCapaciteEndroits = ['6', '7'];
 const equipmentFormFinalConf = () => {
   const { equipmentLocations, equipmentBrands, gas_types } = useEquipments();
 
-  const equipmentBrandsOptions = convertToOptions(equipmentBrands);
-
-  const locationsOptions = convertToOptions(equipmentLocations);
-  const gas_types_options = convertToOptions(gas_types);
-
   const parametrage = parametrageConfComp();
 
   return {
@@ -46,7 +40,7 @@ const equipmentFormFinalConf = () => {
       initialValue: '',
       validationSchema: Yup.number().required('Emplacement requis').integer(),
       type: 'select', // Input type
-      options: locationsOptions,
+      options: [{ value: '', label: 'Choissisez' }, ...equipmentLocations],
       visibleWhen: (values: EquipmentFormValues) =>
         values.equipment_type && interieurEndroits.includes(values.endroit),
     },
@@ -68,7 +62,7 @@ const equipmentFormFinalConf = () => {
     },
     equipment_brand_id: {
       ...brandIds,
-      options: equipmentBrandsOptions,
+      options: [{ value: '', label: 'Choissisez' }, ...equipmentBrands],
       visibleWhen: (values: EquipmentFormValues) =>
         values.equipment_type_id || marqueEndroits.includes(values.endroit),
     },
@@ -100,7 +94,7 @@ const equipmentFormFinalConf = () => {
     // TYPE DE GAZ
     gas_type_id: {
       ...gas_type_id,
-      options: gas_types_options,
+      options: [{ value: '', label: 'Choissisez' }, ...gas_types],
       visibleWhen: (values: EquipmentFormValues) =>
         gasEndroits.includes(values.endroit) && values.serial_number,
     },

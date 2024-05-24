@@ -84,7 +84,6 @@ const ClientsProvider: React.FC<ClientsProviderProps> = ({ children }) => {
         clients,
         client,
         error,
-
         getClients,
         handleAddClient,
       }}>
