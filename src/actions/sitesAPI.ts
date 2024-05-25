@@ -27,7 +27,7 @@ export const addSite = async (siteData: SitesInterface) => {
 
 export const fetchSites = async (): Promise<SitesInterface[]> => {
   try {
-    const response = await axios.get<SitesInterface[]>(`${BASE_PATH}/sites`);
+    const response = await axios.get<SitesInterface[]>(`${BASE_PATH}sites`);
     return response.data;
   } catch (err) {
     console.error(err);
@@ -41,12 +41,12 @@ export const fetchSites = async (): Promise<SitesInterface[]> => {
   }
 };
 
-export const getSiteById = async (id: number): Promise<SitesInterface> => {
+export const getSiteById = async (id: number): Promise<SitesInterface[]> => {
   try {
     const response = await axios.get<SitesInterface[]>(
       `${BASE_PATH}/sites/${id}`
     );
-    return response.data.data;
+    return response.data;
   } catch (err) {
     console.error(err);
     if (axios.isAxiosError(err)) {

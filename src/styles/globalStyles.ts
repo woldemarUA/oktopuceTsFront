@@ -20,8 +20,8 @@ const globalStyles = {
   formContainer: 'space-y-4 max-w-xl mx-auto p-5 shadow-sm',
 
   imageRow: 'grid grid-cols-2 gap-4 content-center',
-  imgLabelCell: 'flex-1 mb-4 sm:mb-0 sm:items-center',
-  imageImgCell: 'flex sm:ml-4 items-center justify-center',
+  imgLabelCell: 'flex-1 mb-4 content-center sm:mb-0 sm:items-center',
+  imageImgCell: 'flex sm:ml-4 items-center justify-center rounded',
 };
 
 export default globalStyles;

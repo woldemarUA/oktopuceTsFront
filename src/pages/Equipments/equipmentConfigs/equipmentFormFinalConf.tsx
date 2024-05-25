@@ -16,24 +16,46 @@ import {
   ballon_capacite,
   installation_date,
   nfc_tag_id,
+  unite_exterieur_type_id,
+  unite_interieur_type_id,
 } from './equipmentConfigSharedFields';
 
 import parametrageConfComp from './parametrageConfComp';
 
 const interieurEndroits = ['1', '3'];
 
-const marqueEndroits = ['3', '6', '7'];
+// const marqueEndroits = ['3', '6', '7'];
 const gasEndroits = ['2', '4', '6', '8'];
 const finalitiesEquipmentIds = ['10', '11', '12'];
 const ballonCapaciteEndroits = ['6', '7'];
 
 const equipmentFormFinalConf = () => {
-  const { equipmentLocations, equipmentBrands, gas_types } = useEquipments();
+  const {
+    equipmentLocations,
+    equipmentBrands,
+    gas_types,
+    int_types,
+    ext_types,
+  } = useEquipments();
+
+  console.log(int_types, ext_types);
 
   const parametrage = parametrageConfComp();
 
   return {
     ...parametrage,
+    unite_exterieur_type_id: {
+      ...unite_exterieur_type_id,
+      options: [{ value: '', label: ' Choissisez' }, ...ext_types],
+      visibleWhen: (values: Record<string, any>) =>
+        values.equipment_type_id === '13' || values.equipment_type_id === '14',
+    },
+    unite_interieur_type_id: {
+      ...unite_interieur_type_id,
+      options: [{ value: '', label: ' Choissisez' }, ...int_types],
+      visibleWhen: (values: Record<string, any>) =>
+        values.equipment_type_id === '10',
+    },
 
     location_id: {
       label: 'Emplacement',
@@ -53,7 +75,7 @@ const equipmentFormFinalConf = () => {
         values.equipment_type && interieurEndroits.includes(values.endroit),
     },
 
-    precision: {
+    location_precision: {
       label: 'Preicsez',
       initialValue: '',
       validationSchema: Yup.string().notRequired(),
@@ -63,8 +85,7 @@ const equipmentFormFinalConf = () => {
     equipment_brand_id: {
       ...brandIds,
       options: [{ value: '', label: 'Choissisez' }, ...equipmentBrands],
-      visibleWhen: (values: EquipmentFormValues) =>
-        values.equipment_type_id || marqueEndroits.includes(values.endroit),
+      visibleWhen: (values: EquipmentFormValues) => values.equipment_type_id, //|| marqueEndroits.includes(values.endroit),
     },
     equipment_model: {
       ...equipment_model,

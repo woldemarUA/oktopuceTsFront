@@ -15,6 +15,9 @@ import {
   fetchEquipmentLocations,
   fetchEqBrands,
   fetchgasTypes,
+  fetchEquipments,
+  fetchExtTypes,
+  fetchIntTypes,
 } from '../actions/equipmentsAPI';
 
 interface EquipmentContextTypes {
@@ -23,6 +26,8 @@ interface EquipmentContextTypes {
   equipmentBrands: Option[];
   equipmentLocations: Option[];
   gas_types: GasTypeInterface[];
+  int_types: Option[];
+  ext_types: Option[];
   error: Error | null;
 }
 
@@ -32,6 +37,8 @@ const DefaultContextValue: EquipmentContextTypes = {
   equipmentBrands: [],
   equipmentLocations: [],
   gas_types: [],
+  int_types: [],
+  ext_types: [],
   error: null,
 };
 
@@ -46,6 +53,8 @@ const EquipmentProvider = ({ children }: EquipmentProviderProps) => {
   // to change
 
   const [gas_types, setGasTypes] = useState<GasTypeInterface[]>([]);
+  const [int_types, setIntTypes] = useState<Option[]>([]);
+  const [ext_types, setExtTypes] = useState<Option[]>([]);
   // fin to change
   const [equipments, setEquipments] = useState<EquipmentInterface[]>([]);
   const [equipment, setEquipment] = useState<EquipmentInterface | null>(null);
@@ -53,6 +62,22 @@ const EquipmentProvider = ({ children }: EquipmentProviderProps) => {
   const [equipmentLocations, setEquipmentLocations] = useState<Option[]>([]);
   const [error, setError] = useState<Error | null>(null);
   const [fetchFlag, setFetchFlag] = useState(false);
+
+  const getEquipments = async () => {
+    try {
+      const equipments = await fetchEquipments();
+      setEquipments(equipments);
+    } catch (err) {
+      console.error(err);
+      setError(
+        err instanceof Error
+          ? err
+          : new Error('Échec de la récupération des gast typse')
+      );
+    } finally {
+      setFetchFlag(false);
+    }
+  };
 
   const getGasTypes = async () => {
     try {
@@ -64,6 +89,38 @@ const EquipmentProvider = ({ children }: EquipmentProviderProps) => {
         err instanceof Error
           ? err
           : new Error('Échec de la récupération des gast typse')
+      );
+    } finally {
+      setFetchFlag(false);
+    }
+  };
+
+  const getIntTypes = async () => {
+    try {
+      const res = await fetchIntTypes();
+      setIntTypes(res);
+    } catch (err) {
+      console.error(err);
+      setError(
+        err instanceof Error
+          ? err
+          : new Error('Échec de la récupération des int typse')
+      );
+    } finally {
+      setFetchFlag(false);
+    }
+  };
+
+  const getExtTypes = async () => {
+    try {
+      const res = await fetchExtTypes();
+      setExtTypes(res);
+    } catch (err) {
+      console.error(err);
+      setError(
+        err instanceof Error
+          ? err
+          : new Error('Échec de la récupération des int typse')
       );
     } finally {
       setFetchFlag(false);
@@ -104,6 +161,12 @@ const EquipmentProvider = ({ children }: EquipmentProviderProps) => {
 
   useEffect(() => {
     getGasTypes();
+    getExtTypes();
+    getIntTypes();
+  }, [fetchFlag]);
+
+  useEffect(() => {
+    getEquipments();
   }, [fetchFlag]);
 
   useEffect(() => {
@@ -122,6 +185,8 @@ const EquipmentProvider = ({ children }: EquipmentProviderProps) => {
         equipmentBrands,
         equipmentLocations,
         gas_types,
+        int_types,
+        ext_types,
         error,
       }}>
       {children}

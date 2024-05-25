@@ -68,13 +68,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
         setFieldValue(name, value);
       }
     },
-    [
-      setFieldValue,
-      options,
-      //memoizedOptions,
-      name,
-      handleAddOption,
-    ]
+    [setFieldValue, options, name, handleAddOption]
   );
 
   return (

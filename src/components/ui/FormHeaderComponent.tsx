@@ -12,8 +12,6 @@ const FormHeaderComponent = ({
   titreLabel,
   imageName,
 }: FormHeaderComponentProps) => {
-  //FormHeaderComponentProps
-
   return (
     <div className={globalStyles.imageRow}>
       <div className={globalStyles.imgLabelCell}>
@@ -22,6 +20,7 @@ const FormHeaderComponent = ({
       </div>
       <div className={globalStyles.imageImgCell}>
         <img
+          className='rounded'
           src={`${PICTO_PATH}/${imageName}.png`}
           alt='Equipment'
         />

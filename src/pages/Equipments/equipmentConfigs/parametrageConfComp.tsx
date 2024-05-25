@@ -3,6 +3,8 @@ import { useSites } from '../../../context/SitesProvider';
 import * as Yup from 'yup';
 import { EquipmentFormValues } from '../../../interface/equipment_interface.ts';
 
+import { checkEndroit } from '../../../components/forms/FormFin.tsx';
+
 // regulates equipment_type_id visiblity
 export const chaleurEauOptions = ['1', '2', '4', '8'];
 
@@ -120,8 +122,10 @@ export const equipment_type_id = {
   label: "Type d'unite?",
   initialValue: '',
   validationSchema: Yup.number().required(' Type requis').integer(),
-  visibleWhen: (values: EquipmentFormValues) =>
-    values.equipment_type && chaleurEauOptions.includes(values.endroit),
+  visibleWhen: (values: EquipmentFormValues) => {
+    return checkEndroit(values) && chaleurEauOptions.includes(values.endroit);
+    // return values.equipment_type && chaleurEauOptions.includes(values.endroit);
+  },
   type: 'select', // Input type
   options: (values: EquipmentFormValues) => {
     return equipment_type_id_mapping.get(
@@ -130,9 +134,6 @@ export const equipment_type_id = {
   },
   image: true,
 };
-
-// for (const item of endroit_mapping.entries()) console.log(item);
-// // for (const equipment_type of item) console.log(equipment_type.value);
 
 function parametrageConfComp() {
   const { sites } = useSites();

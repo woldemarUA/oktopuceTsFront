@@ -14,8 +14,6 @@ import FormComponent from './formComps/FormComponent';
 
 import ControllerAddOption from './formComps/ControllerAddOption';
 
-// import AddOption from './formComps/AddOption';
-import MultiStep from './formComps/MultiStep';
 import Button from '../ui/Button';
 
 import { endroit_mapping } from '../../pages/Equipments/equipmentConfigs/parametrageConfComp';
@@ -59,7 +57,7 @@ const generateVisibleField = (
 
 //  verification si endroit correspondant a equipment_type
 
-const checkEndroit = (valeurs: Record<string, any>): boolean => {
+export const checkEndroit = (valeurs: Record<string, any>): boolean => {
   let check = false;
   if (valeurs.endroit) {
     const test = endroit_mapping.get(parseInt(valeurs.equipment_type));
@@ -77,8 +75,7 @@ const FormFin: React.FC<MyFormProps> = ({
   formFieldConfig,
   handleSubmit,
   title,
-  multiStep = false,
-  multiConf = {},
+
   containerStyle = true,
   formValues,
   addedOptionValue,
@@ -88,32 +85,6 @@ const FormFin: React.FC<MyFormProps> = ({
   const [valeurs, setValeurs] = useState<Record<string, any>>({}); // sets form values to be accesible outside the Formik
   const [isAddOption, setIsAddOption] = useState<boolean>(false);
   const [endroitCheck, setEndroitCheck] = useState<boolean>(true); // result of the check whether the androit corresponds the equipment type
-  // const {
-  //   // setisAddOption,
-  //   addOptionProps,
-  //   // setAddOptionProps,
-  //   handleAddOption,
-  // } = useForms(); // set by option component if there is a need to add the option
-
-  // const isAddOptionT = useMemo(() => useForms(), [isAddOption]);
-
-  // const [addOptionProps, setAddOptionProps] =
-  //   useState<handleAddOptionInterface>({
-  //     name: '',
-  //     to: '',
-  //     from: '',
-  //     newStep: 0,
-  //   });
-
-  // const handleAddOption = ({
-  //   name,
-  //   to,
-  //   from,
-  //   newStep,
-  // }: handleAddOptionInterface): void => {
-  //   setisAddOption(!isAddOption);
-  //   setAddOptionProps({ name, to, from, newStep });
-  // };
 
   const config = useMemo(() => {
     let inVal = Object.keys(formFieldConfig).reduce<Record<string, any>>(
@@ -188,23 +159,16 @@ const FormFin: React.FC<MyFormProps> = ({
           {({ values, setFieldValue }) => {
             useEffect(() => {
               setValeurs(values);
-
               if (addedOptionValue) {
                 Object.entries(addedOptionValue).forEach((entry) =>
                   setFieldValue(entry[0], entry[1])
                 );
               }
-              if (
-                values.endroit &&
-                values.equipment_type &&
-                !checkEndroit(values)
-              ) {
-                Object.keys(values).forEach((key) => {
-                  if (key !== 'endroit' && key !== 'equipment_type') {
-                    setFieldValue('endroit', initialValues[key]);
-                    setFieldValue('equipment_brand_id', initialValues[key]);
-                  }
-                });
+
+              // check endroit and reset the equipment_type_id
+              if (!checkEndroit(values)) {
+                setFieldValue('endroit', '', false);
+                setFieldValue('equipment_type_id', '', false);
               }
             }, [values, initialValues, setFieldValue, addedOptionValue]);
 
@@ -223,30 +187,21 @@ const FormFin: React.FC<MyFormProps> = ({
                     {message}
                   </p>
                 </div>
-                {multiStep ? (
-                  <MultiStep
-                    valuesForm={values}
-                    title={title}
-                    formFieldConfig={multiConf}
-                    submissionSuccess={submissionSuccess}
-                  />
-                ) : (
-                  <FormComponent
-                    formFieldConfig={config}
-                    values={values}
-                    title={title}
-                    isAdd={isAddOption}
-                    isAddSetter={setIsAddOption}
-                    children={
-                      <Button
-                        btnType='submit'
-                        className={globalStyles.button}
-                        title={title}
-                        isDisabled={false}
-                      />
-                    }
-                  />
-                )}
+                <FormComponent
+                  formFieldConfig={config}
+                  values={values}
+                  title={title}
+                  isAdd={isAddOption}
+                  isAddSetter={setIsAddOption}
+                  children={
+                    <Button
+                      btnType='submit'
+                      className={globalStyles.button}
+                      title={title}
+                      isDisabled={false}
+                    />
+                  }
+                />
               </div>
             );
           }}

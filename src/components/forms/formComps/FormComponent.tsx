@@ -37,18 +37,11 @@ const FormComponent: React.FC<FormComponentProps> = ({
   isAddSetter,
   children,
 }) => {
-  const { setFieldValue } = useFormikContext();
-
   const [isHeading, setIsHeading] = useState<boolean>(false);
 
   const [formHeader, setFormHeader] = useState<getFormHeadingInterface | null>(
     null
   );
-
-  useEffect(() => {
-    if (Object.keys(eqTypeId).includes(values.endroit))
-      setFieldValue(values.equipment_type_id, eqTypeId[values.endroit]);
-  }, [setFieldValue, formFieldConfig, values]);
 
   useEffect(() => {
     if (values.equipment_type && values.endroit && values.equipment_type_id) {

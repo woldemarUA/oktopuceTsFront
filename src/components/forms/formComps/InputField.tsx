@@ -26,8 +26,10 @@ const InputField: React.FC<InputFieldProps> = ({ label, type, name }) => {
 
   useEffect(() => {
     if (name === 'leak_detection_periodicity') {
+      console.log(gas_types);
+      console.log(gas_types[parseInt(values.gas_type_id, 10) - 1]);
       const potentiel =
-        gas_types[parseInt(values.gas_type_id, 10) - 1].potentiel;
+        gas_types[parseInt(values.gas_type_id, 10) - 1]?.potentiel;
 
       const periodicity = controleEtancheite(
         parseInt(values.gas_weight, 10),

@@ -93,18 +93,13 @@ export const unite_exterieur_type_id = {
   initialValue: '',
   validationSchema: Yup.number().integer(),
   type: 'select', // Input type
-  options: [
-    { value: '', label: ' Choissisez' },
-    { value: 1, label: 'MONO-SPLIT' },
-    { value: 2, label: 'BI-SPLIT' },
-    { value: 3, label: 'TRI-SPLIT' },
-    { value: 4, label: 'QUADRI-SPLIT' },
-    { value: 5, label: '5 POSTES' },
-    { value: 6, label: 'DRV / VRV' },
-    { value: 7, label: 'GROUPE A EAU GLACEE (CHILLER)' },
-    { value: 8, label: 'GROUPE A E' },
-    { value: 9, label: 'AUTRE' },
-  ],
+};
+
+export const unite_interieur_type_id = {
+  label: 'Type',
+  initialValue: '',
+  validationSchema: Yup.number().integer(),
+  type: 'select', // Input type
 };
 export const ballon_capacite = {
   label: 'Capacité du ballon',
@@ -113,16 +108,16 @@ export const ballon_capacite = {
   type: 'select', // Input type
   options: [
     { value: '', label: ' Choissisez' },
-    { value: 301, label: '80L' },
-    { value: 302, label: '100L' },
-    { value: 303, label: '150L' },
-    { value: 304, label: '200L' },
-    { value: 305, label: '215L' },
-    { value: 306, label: '240L' },
-    { value: 307, label: '260L' },
-    { value: 308, label: '270L' },
-    { value: 309, label: '300L' },
-    { value: 310, label: 'NE SAIS PAS' },
+    { value: 80, label: '80L' },
+    { value: 100, label: '100L' },
+    { value: 150, label: '150L' },
+    { value: 200, label: '200L' },
+    { value: 215, label: '215L' },
+    { value: 240, label: '240L' },
+    { value: 260, label: '260L' },
+    { value: 270, label: '270L' },
+    { value: 300, label: '300L' },
+    { value: 1, label: 'NE SAIS PAS' },
   ],
 };
 
@@ -139,19 +134,3 @@ export const nfc_tag_id = {
   validationSchema: Yup.number().required('Numero de NFC est requis'),
   type: 'number',
 };
-
-// export const convertToOptions = (options: Record<string, any>[]) => {
-//   return [
-//     { value: '', label: 'Choissisez' },
-//     ...options.map((option) => {
-//       const optionFin: Record<string, string | number> = {};
-//       optionFin.value = option.id;
-//       optionFin.label = option.name;
-//       if (option?.global_warming_potential !== undefined) {
-//         optionFin.potentiel = option.global_warming_potential;
-//       }
-//       // return { value: option.id, label: option.name };
-//       return optionFin;
-//     }),
-//   ];
-// };
