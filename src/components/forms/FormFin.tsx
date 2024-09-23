@@ -133,6 +133,7 @@ const FormFin: React.FC<MyFormProps> = ({
   ) => {
     try {
       const resp = await handleSubmit(values);
+      console.log(resp);
       const { msg } = resp;
       actions.setSubmitting(false); // Arrêt de l'indication de soumission une fois terminée.
       actions.resetForm(); // Vider le formulaire  une fois terminée.

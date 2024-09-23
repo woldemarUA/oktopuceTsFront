@@ -11,14 +11,39 @@ export interface GasTypeInterface extends Option {
   potentiel: string;
 }
 
-const BASE_PATH: string = import.meta.env.VITE_API_PATH;
+const BASE_PATH: string = import.meta.env.VITE_API_PATH + 'equipment';
+const LOCATIONS_API: string = import.meta.env.VITE_API_PATH + 'locations';
+const GAS_TYPES_API: string = import.meta.env.VITE_API_PATH + 'gas_types';
+const BRANDS_API: string = import.meta.env.VITE_API_PATH + 'equipment_brands';
+const INT_TYPES_API: string = import.meta.env.VITE_API_PATH + 'int_types';
+const EXT_TYPES_API: string = import.meta.env.VITE_API_PATH + 'ext_types';
+const NFC_API: string = import.meta.env.VITE_API_PATH + 'nfc_tags';
+
+export const addEquipment = async (equipmentData: Record<string, any>) => {
+  try {
+    await axios.post(BASE_PATH, equipmentData, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
+    return { msg: 'Machine  etait ajoutée avec success' };
+  } catch (error) {
+    console.error(error);
+    if (axios.isAxiosError(error)) {
+      throw new Error(
+        `Ajouter de la machine a échoué avec le statut: ${error.response?.status}`
+      );
+    } else {
+      throw new Error('Une erreur inattendue est apparue');
+    }
+  }
+};
 
 export const fetchEquipments = async (): Promise<EquipmentInterface[]> => {
   try {
-    const response = await axios.get<EquipmentInterface[]>(
-      `${BASE_PATH}equipments/`
-    );
-    console.log(response.data);
+    const response = await axios.get<EquipmentInterface[]>(`${BASE_PATH}`);
+
     return response.data;
   } catch (err) {
     console.error(err);
@@ -34,9 +59,8 @@ export const fetchEquipments = async (): Promise<EquipmentInterface[]> => {
 
 export const fetchEquipmentLocations = async (): Promise<Option[]> => {
   try {
-    const response = await axios.get<Option[]>(
-      `${BASE_PATH}equipments/locations`
-    );
+    const response = await axios.get<Option[]>(LOCATIONS_API);
+
     return response.data;
   } catch (err) {
     console.error(err);
@@ -52,7 +76,7 @@ export const fetchEquipmentLocations = async (): Promise<Option[]> => {
 
 export const fetchEqBrands = async (): Promise<Option[]> => {
   try {
-    const response = await axios.get<Option[]>(`${BASE_PATH}equipments/brands`);
+    const response = await axios.get<Option[]>(`${BRANDS_API}`);
     const brands = response.data;
 
     return brands;
@@ -70,9 +94,8 @@ export const fetchEqBrands = async (): Promise<Option[]> => {
 
 export const fetchgasTypes = async (): Promise<GasTypeInterface[]> => {
   try {
-    const response = await axios.get<GasTypeInterface[]>(
-      `${BASE_PATH}equipments/gas-types`
-    );
+    const response = await axios.get<GasTypeInterface[]>(`${GAS_TYPES_API}`);
+
     const gasTypes = response.data;
 
     return gasTypes;
@@ -90,9 +113,7 @@ export const fetchgasTypes = async (): Promise<GasTypeInterface[]> => {
 
 export const fetchIntTypes = async (): Promise<Option[]> => {
   try {
-    const response = await axios.get<Option[]>(
-      `${BASE_PATH}equipments/int-types`
-    );
+    const response = await axios.get<Option[]>(`${INT_TYPES_API}`);
 
     return response.data;
   } catch (err) {
@@ -109,9 +130,7 @@ export const fetchIntTypes = async (): Promise<Option[]> => {
 
 export const fetchExtTypes = async (): Promise<Option[]> => {
   try {
-    const response = await axios.get<Option[]>(
-      `${BASE_PATH}equipments/ext-types`
-    );
+    const response = await axios.get<Option[]>(`${EXT_TYPES_API}`);
 
     return response.data;
   } catch (err) {
@@ -119,6 +138,24 @@ export const fetchExtTypes = async (): Promise<Option[]> => {
     if (axios.isAxiosError(err)) {
       throw new Error(
         `La récupération des equipment ext types a échoué avec le statut: ${err.response?.status}`
+      );
+    } else {
+      throw new Error('Une erreur inattendue est apparue');
+    }
+  }
+};
+
+export const fetchNfcs = async (): Promise<Option[]> => {
+  try {
+    const response = await axios.get<Option[]>(`${NFC_API}`);
+    const nfcs = response.data;
+
+    return nfcs;
+  } catch (err) {
+    console.error(err);
+    if (axios.isAxiosError(err)) {
+      throw new Error(
+        `La récupération des nfcs a échoué avec le statut: ${err.response?.status}`
       );
     } else {
       throw new Error('Une erreur inattendue est apparue');

@@ -26,6 +26,9 @@ export function getTitle(item: any): string {
   if (item.type) {
     return `${item.type} - site: ${item.site} -  fait par: ${item.technician_name}`;
   }
+  if (item.serialNumber) {
+    return `${item.equipmentType.name}`; //-${item.serialNumber}
+  }
 
   // Default title if none of the conditions are met
   return 'No title available';
@@ -53,4 +56,11 @@ export const getSubset = (
     },
     {}
   );
+};
+
+export const convertOptions = (obj: Record<any, any>[]) => {
+  return obj.map((o) => ({
+    value: o.id,
+    label: o.uuid || o.name || `${o.first_name}  ${o.last_name}`,
+  }));
 };

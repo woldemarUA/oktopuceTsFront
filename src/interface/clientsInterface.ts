@@ -25,3 +25,9 @@ export interface ClientFormValues {
   email?: string;
   language?: string; // Add all other fields as necessary
 }
+
+export interface ClientType {
+  id: number;
+  name: string;
+  clients: any[]; // Adjust the type of `clients` if you have a specific type for it
+}

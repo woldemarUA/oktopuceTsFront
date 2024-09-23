@@ -1,5 +1,4 @@
-import EquipmentInterface from '../../interface/equipmentInterface';
-
+import { EquipmentInterface } from '../../interface/equipment_interface';
 interface EquipmentListItemProps {
   item: EquipmentInterface;
 }

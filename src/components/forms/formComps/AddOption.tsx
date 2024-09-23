@@ -43,7 +43,7 @@ const AddOption = ({ name, to, from }: AddOptionProps) => {
   const [valuesToSend, setValuesToSend] = useState<Record<string, any>>({});
 
   // const [isMultiStep] = useState<boolean>(from === 'Ajout Intervention');
-  console.log(name, to, from);
+
   //  add handlers
   const { handleAddClient } = useClients();
   const { handleAddSite } = useSites();
@@ -77,7 +77,7 @@ const AddOption = ({ name, to, from }: AddOptionProps) => {
   const handleSubmit = async (values: Record<string, any>) => {
     try {
       const response = await actionApi(values);
-      console.log(response);
+
       setIsFrom(true);
 
       setValuesToSend({ [name]: response.addedItem.id });

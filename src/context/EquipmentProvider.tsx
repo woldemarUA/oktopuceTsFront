@@ -18,6 +18,8 @@ import {
   fetchEquipments,
   fetchExtTypes,
   fetchIntTypes,
+  addEquipment,
+  fetchNfcs,
 } from '../actions/equipmentsAPI';
 
 interface EquipmentContextTypes {
@@ -26,9 +28,13 @@ interface EquipmentContextTypes {
   equipmentBrands: Option[];
   equipmentLocations: Option[];
   gas_types: GasTypeInterface[];
+  nfcList: Option[];
   int_types: Option[];
   ext_types: Option[];
   error: Error | null;
+  handleAddEquipment: (
+    equipmentData: EquipmentInterface
+  ) => Promise<{ msg: string }>;
 }
 
 const DefaultContextValue: EquipmentContextTypes = {
@@ -40,6 +46,12 @@ const DefaultContextValue: EquipmentContextTypes = {
   int_types: [],
   ext_types: [],
   error: null,
+  nfcList: [],
+  handleAddEquipment: async () => {
+    return {
+      msg: 'message',
+    };
+  },
 };
 
 interface EquipmentProviderProps {
@@ -60,12 +72,55 @@ const EquipmentProvider = ({ children }: EquipmentProviderProps) => {
   const [equipment, setEquipment] = useState<EquipmentInterface | null>(null);
   const [equipmentBrands, setEquipmentBrands] = useState<Option[]>([]);
   const [equipmentLocations, setEquipmentLocations] = useState<Option[]>([]);
+
+  const [nfcList, setNfcList] = useState<Option[]>([]);
   const [error, setError] = useState<Error | null>(null);
   const [fetchFlag, setFetchFlag] = useState(false);
+
+  const handleAddEquipment = async (
+    equipmentData: EquipmentInterface
+  ): Promise<{ msg: string }> => {
+    try {
+      const equipmentPayload = {
+        ...equipmentData,
+        site: `/api/sites/${equipmentData.site}`,
+        equipment_type: `/api/equipment_types/${equipmentData.equipment_type_id}`,
+        nfc_tag: `/api/nfc_tags/${equipmentData.nfc_tag}`,
+        gas_weight: parseInt(equipmentData.gas_weight || '0', 10),
+        equipment_brand: `/api/equipment_brands/${equipmentData.equipment_brand_id}`,
+      };
+
+      const serverResp = await addEquipment(equipmentPayload);
+      setFetchFlag(true);
+
+      return serverResp;
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
+  const getNfcs = async () => {
+    try {
+      const nfcs = await fetchNfcs();
+
+      setNfcList(nfcs);
+    } catch (err) {
+      console.error(err);
+      setError(
+        err instanceof Error
+          ? err
+          : new Error('Échec de la récupération des gast typse')
+      );
+    } finally {
+      setFetchFlag(false);
+    }
+  };
 
   const getEquipments = async () => {
     try {
       const equipments = await fetchEquipments();
+
       setEquipments(equipments);
     } catch (err) {
       console.error(err);
@@ -104,7 +159,7 @@ const EquipmentProvider = ({ children }: EquipmentProviderProps) => {
       setError(
         err instanceof Error
           ? err
-          : new Error('Échec de la récupération des int typse')
+          : new Error('Échec de la récupération des int types')
       );
     } finally {
       setFetchFlag(false);
@@ -163,6 +218,7 @@ const EquipmentProvider = ({ children }: EquipmentProviderProps) => {
     getGasTypes();
     getExtTypes();
     getIntTypes();
+    getNfcs();
   }, [fetchFlag]);
 
   useEffect(() => {
@@ -188,6 +244,8 @@ const EquipmentProvider = ({ children }: EquipmentProviderProps) => {
         int_types,
         ext_types,
         error,
+        nfcList,
+        handleAddEquipment,
       }}>
       {children}
     </EquipmentContext.Provider>

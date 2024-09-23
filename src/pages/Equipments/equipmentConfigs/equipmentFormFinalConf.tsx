@@ -24,6 +24,8 @@ import parametrageConfComp from './parametrageConfComp';
 
 const interieurEndroits = ['1', '3'];
 
+import { convertOptions } from '../../../utilities/convertors';
+
 // const marqueEndroits = ['3', '6', '7'];
 const gasEndroits = ['2', '4', '6', '8'];
 const finalitiesEquipmentIds = ['10', '11', '12'];
@@ -36,9 +38,16 @@ const equipmentFormFinalConf = () => {
     gas_types,
     int_types,
     ext_types,
+    nfcList,
   } = useEquipments();
 
-  console.log(int_types, ext_types);
+  const equipmentLocationsOptions = convertOptions(equipmentLocations);
+  const brandsOptions = convertOptions(equipmentBrands);
+  const gasTypesOptions = convertOptions(gas_types);
+  const nfcOptions = convertOptions(nfcList);
+
+  const intTypesOptions = convertOptions(int_types);
+  const extTypeOptions = convertOptions(ext_types);
 
   const parametrage = parametrageConfComp();
 
@@ -46,13 +55,13 @@ const equipmentFormFinalConf = () => {
     ...parametrage,
     unite_exterieur_type_id: {
       ...unite_exterieur_type_id,
-      options: [{ value: '', label: ' Choissisez' }, ...ext_types],
+      options: [{ value: '', label: ' Choissisez' }, ...extTypeOptions],
       visibleWhen: (values: Record<string, any>) =>
         values.equipment_type_id === '13' || values.equipment_type_id === '14',
     },
     unite_interieur_type_id: {
       ...unite_interieur_type_id,
-      options: [{ value: '', label: ' Choissisez' }, ...int_types],
+      options: [{ value: '', label: ' Choissisez' }, ...intTypesOptions],
       visibleWhen: (values: Record<string, any>) =>
         values.equipment_type_id === '10',
     },
@@ -62,7 +71,10 @@ const equipmentFormFinalConf = () => {
       initialValue: '',
       validationSchema: Yup.number().required('Emplacement requis').integer(),
       type: 'select', // Input type
-      options: [{ value: '', label: 'Choissisez' }, ...equipmentLocations],
+      options: [
+        { value: '', label: 'Choissisez' },
+        ...equipmentLocationsOptions,
+      ],
       visibleWhen: (values: EquipmentFormValues) =>
         values.equipment_type && interieurEndroits.includes(values.endroit),
     },
@@ -84,7 +96,7 @@ const equipmentFormFinalConf = () => {
     },
     equipment_brand_id: {
       ...brandIds,
-      options: [{ value: '', label: 'Choissisez' }, ...equipmentBrands],
+      options: [{ value: '', label: 'Choissisez' }, ...brandsOptions],
       visibleWhen: (values: EquipmentFormValues) => values.equipment_type_id, //|| marqueEndroits.includes(values.endroit),
     },
     equipment_model: {
@@ -115,7 +127,7 @@ const equipmentFormFinalConf = () => {
     // TYPE DE GAZ
     gas_type_id: {
       ...gas_type_id,
-      options: [{ value: '', label: 'Choissisez' }, ...gas_types],
+      options: [{ value: '', label: 'Choissisez' }, ...gasTypesOptions],
       visibleWhen: (values: EquipmentFormValues) =>
         gasEndroits.includes(values.endroit) && values.serial_number,
     },
@@ -135,7 +147,15 @@ const equipmentFormFinalConf = () => {
         gasEndroits.includes(values.endroit) && values.serial_number,
     },
     installation_date,
-    nfc_tag_id,
+    nfc_tag: {
+      label: 'Numero de NFC',
+      initialValue: '',
+      validationSchema: Yup.number()
+        .required('Numero de NFC est requis')
+        .integer(),
+      type: 'select', // Input type
+      options: [{ value: '', label: 'Choissisez' }, ...nfcOptions],
+    },
   };
 };
 

@@ -9,8 +9,8 @@ import {
 import {
   fetchInterventions,
   addIntervention,
+  fetchInterventionTypes,
 } from '../actions/interventionsAPI';
-import { getSiteById } from '../actions/sitesAPI';
 
 import InterventionInterface, {
   InterventionsFormProps,
@@ -19,6 +19,7 @@ import InterventionInterface, {
 interface InterventionsContextType {
   interventions: InterventionInterface[];
   intervention: InterventionInterface | null;
+  interventionTypes: string[];
   getIntervetions: () => Promise<void>;
   handleAddIntervention: (
     interventionData: InterventionInterface
@@ -29,6 +30,7 @@ interface InterventionsContextType {
 const DefaultContextValue: InterventionsContextType = {
   interventions: [],
   intervention: null,
+  interventionTypes: [],
   getIntervetions: async () => {},
   handleAddIntervention: async () => {
     return {
@@ -55,6 +57,14 @@ const InterventionsProvider: React.FC<InterventionsProviderProps> = ({
     useState<InterventionInterface | null>(null);
   const [error, setError] = useState<Error | null>(null);
   const [fetchFlag, setFetchFlag] = useState(false);
+  const [interventionTypes, setInterventionTypes] = useState<string[]>([]);
+
+  const getInterventionTypes = async () => {
+    try {
+      const typesData = await fetchInterventionTypes();
+      setInterventionTypes(typesData);
+    } catch (error) {}
+  };
 
   const getIntervetions = async () => {
     try {
@@ -116,6 +126,7 @@ const InterventionsProvider: React.FC<InterventionsProviderProps> = ({
 
   useEffect(() => {
     getIntervetions();
+    getInterventionTypes();
   }, [fetchFlag]);
 
   return (
@@ -124,6 +135,7 @@ const InterventionsProvider: React.FC<InterventionsProviderProps> = ({
         interventions,
         intervention,
         error,
+        interventionTypes,
         getIntervetions,
         handleAddIntervention,
       }}>

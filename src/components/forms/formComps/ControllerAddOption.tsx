@@ -15,7 +15,6 @@ const ControllerAddOption = () => {
   >({});
 
   useEffect(() => {
-    console.log(addOptionProps.newStep);
     setStepsData((prevStepData) => ({
       ...prevStepData,
       [addOptionProps.newStep]: addOptionProps,

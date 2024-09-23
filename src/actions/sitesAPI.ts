@@ -3,12 +3,17 @@ import axios from 'axios';
 import SitesInterface from '../interface/sitesInterface';
 // import { SitesFormValues } from '../components/forms/config/sitesFormConfig';
 
-const BASE_PATH: string = import.meta.env.VITE_API_PATH;
+const BASE_PATH: string = import.meta.env.VITE_API_PATH + 'sites';
 
 export const addSite = async (siteData: SitesInterface) => {
   try {
-    const response = await axios.post(`${BASE_PATH}/sites`, siteData);
-    console.log(response.data);
+    const response = await axios.post(`${BASE_PATH}`, siteData, {
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+    });
+
     return {
       msg: 'Site  était ajouté avec succès',
       addedItem: response.data.data,
@@ -27,7 +32,7 @@ export const addSite = async (siteData: SitesInterface) => {
 
 export const fetchSites = async (): Promise<SitesInterface[]> => {
   try {
-    const response = await axios.get<SitesInterface[]>(`${BASE_PATH}sites`);
+    const response = await axios.get<SitesInterface[]>(`${BASE_PATH}`);
     return response.data;
   } catch (err) {
     console.error(err);

@@ -84,13 +84,15 @@ const SelectField: React.FC<SelectFieldProps> = ({
             label={label}
             options={options}
             onChange={onSelectChange}>
-            {options.map((option: Option) => (
-              <option
-                key={option.value}
-                value={option.value}>
-                {option.label}
-              </option>
-            ))}
+            {options.map((option: Option) => {
+              return (
+                <option
+                  key={option.value}
+                  value={option.value}>
+                  {option.label}
+                </option>
+              );
+            })}
           </Field>
           <ErrorMessage
             name={name}

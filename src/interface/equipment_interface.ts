@@ -8,17 +8,17 @@ export interface Finalites {
 export interface EquipmentInterface {
   id: bigint;
   parent_equipment_id?: bigint | null;
-  site_id: bigint;
+  site: string;
   location_id: bigint;
-  nfc_tag_id: bigint;
+  nfc_tag: string;
   gas_type_id?: bigint | null;
-  equipment_type_id: bigint;
-  equipment_brand_id: bigint;
+  equipment_type_id: string;
+  equipment_brand_id: string;
   installation_date: Date;
   location_precision?: string | null;
   serial_number: string;
   remote_control_number: string;
-  gas_weight?: number | null;
+  gas_weight?: string;
   is_plancher_chauffant?: boolean | null;
   is_plancher_raffraichssant?: boolean | null;
   is_radiateurs?: boolean | null;

@@ -4,7 +4,6 @@ const controleEtancheite = (
   detection: boolean
 ): string => {
   const charge = (poids * potentiel) / 1000;
-  console.log(charge);
 
   if (isNaN(charge)) return `Pas assez d'information`;
   if (charge < 5) {

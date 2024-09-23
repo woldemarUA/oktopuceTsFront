@@ -138,15 +138,18 @@ export const equipment_type_id = {
 function parametrageConfComp() {
   const { sites } = useSites();
 
-  const sitesOptions = sites.map((site: Record<string, any>) => {
-    return {
-      value: site.id,
-      label: `${site.name}`,
-    };
-  });
+  const sitesOptions =
+    sites.length > 0
+      ? sites.map((site: Record<string, any>) => {
+          return {
+            value: site.id,
+            label: `${site.name}`,
+          };
+        })
+      : [{ value: 'nodate', label: 'Aucun site fetch error' }];
 
   const formConf = {
-    site_id: {
+    site: {
       label: 'Sur quel site est le produit?',
       initialValue: '',
       validationSchema: Yup.number().required('Site requis').integer(),

@@ -2,7 +2,15 @@
 import * as Yup from 'yup';
 import { ClientFormValues } from '../../../interface/clientsInterface';
 
+import { convertOptions } from '../../../utilities/convertors';
+
+import { useClients } from '../../../context/ClientsProvider';
+
 const clientFormComponentConfig = () => {
+  const { clientTypes } = useClients();
+
+  const clientTypesOptions = convertOptions(clientTypes);
+
   return {
     language: {
       label: 'Langue',
@@ -24,11 +32,7 @@ const clientFormComponentConfig = () => {
         // .positive('Must be a positive number')
         .integer(),
       type: 'select', // Input type
-      options: [
-        { value: '', label: 'Select a role' },
-        { value: 1, label: 'Individual' },
-        { value: 2, label: 'Professional' },
-      ],
+      options: [{ value: '', label: 'Select a role' }, ...clientTypesOptions],
     },
     first_name: {
       label: 'Nom',

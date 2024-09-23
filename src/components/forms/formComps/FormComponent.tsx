@@ -15,7 +15,7 @@ import {
   getFormHeadingInterface,
 } from '../../../utilities/getFormHeading';
 
-import { eqTypeId } from '../../../pages/Equipments/equipmentConfigs/parametrageConfComp';
+// import { eqTypeId } from '../../../pages/Equipments/equipmentConfigs/parametrageConfComp';
 
 import globalStyles from '../../../styles/globalStyles';
 
