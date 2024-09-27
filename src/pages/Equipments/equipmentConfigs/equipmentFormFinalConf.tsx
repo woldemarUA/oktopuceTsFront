@@ -53,20 +53,20 @@ const equipmentFormFinalConf = () => {
 
   return {
     ...parametrage,
-    unite_exterieur_type_id: {
+    uniteExterieurType: {
       ...unite_exterieur_type_id,
       options: [{ value: '', label: ' Choissisez' }, ...extTypeOptions],
       visibleWhen: (values: Record<string, any>) =>
         values.equipment_type_id === '13' || values.equipment_type_id === '14',
     },
-    unite_interieur_type_id: {
+    uniteInterieurType: {
       ...unite_interieur_type_id,
       options: [{ value: '', label: ' Choissisez' }, ...intTypesOptions],
       visibleWhen: (values: Record<string, any>) =>
         values.equipment_type_id === '10',
     },
 
-    location_id: {
+    location: {
       label: 'Emplacement',
       initialValue: '',
       validationSchema: Yup.number().required('Emplacement requis').integer(),
@@ -76,7 +76,7 @@ const equipmentFormFinalConf = () => {
         ...equipmentLocationsOptions,
       ],
       visibleWhen: (values: EquipmentFormValues) =>
-        values.equipment_type && interieurEndroits.includes(values.endroit),
+        values.equipmentType && interieurEndroits.includes(values.endroit),
     },
     precisionCheck: {
       label: 'Précision',
@@ -84,70 +84,70 @@ const equipmentFormFinalConf = () => {
       validationSchema: Yup.boolean(),
       type: 'checkbox',
       visibleWhen: (values: EquipmentFormValues) =>
-        values.equipment_type && interieurEndroits.includes(values.endroit),
+        values.equipmentType && interieurEndroits.includes(values.endroit),
     },
 
-    location_precision: {
+    locationPrecision: {
       label: 'Preicsez',
       initialValue: '',
       validationSchema: Yup.string().notRequired(),
       type: 'text',
       visibleWhen: (values: EquipmentFormValues) => values.precisionCheck,
     },
-    equipment_brand_id: {
+    equipmentBrand: {
       ...brandIds,
       options: [{ value: '', label: 'Choissisez' }, ...brandsOptions],
-      visibleWhen: (values: EquipmentFormValues) => values.equipment_type_id, //|| marqueEndroits.includes(values.endroit),
+      visibleWhen: (values: EquipmentFormValues) => values.equipmentType, //|| marqueEndroits.includes(values.endroit),
     },
-    equipment_model: {
+    equipmentModel: {
       ...equipment_model,
-      visibleWhen: (values: EquipmentFormValues) => values.equipment_brand_id,
+      visibleWhen: (values: EquipmentFormValues) => values.equipmentBrand,
     },
-    serial_number: {
+    serialNumber: {
       ...serial_number,
-      visibleWhen: (values: EquipmentFormValues) => values.equipment_model,
+      visibleWhen: (values: EquipmentFormValues) => values.equipmentModel,
     },
-    ballon_capacite: {
+    ballonCapacite: {
       ...ballon_capacite,
       visibleWhen: (values: EquipmentFormValues) =>
         ballonCapaciteEndroits.includes(values.endroit),
     },
-    remote_control_number: {
+    remoteControlNumber: {
       ...remote_control_number,
       visibleWhen: (values: EquipmentFormValues) =>
-        values.equipment_model && values.endroit === '1',
+        values.equipmentModel && values.endroit === '1',
     },
     finalites: {
       ...finalites,
       visibleWhen: (values: EquipmentFormValues) =>
-        values.serial_number &&
-        (finalitiesEquipmentIds.includes(values.equipment_type_id) ||
-          (values.endroit === '3' && values.equipment_type === '2')),
+        values.serialNumber &&
+        (finalitiesEquipmentIds.includes(values.equipmentType) ||
+          (values.endroit === '3' && values.equipmentType === '2')),
     },
     // TYPE DE GAZ
-    gas_type_id: {
+    gasType: {
       ...gas_type_id,
       options: [{ value: '', label: 'Choissisez' }, ...gasTypesOptions],
       visibleWhen: (values: EquipmentFormValues) =>
-        gasEndroits.includes(values.endroit) && values.serial_number,
+        gasEndroits.includes(values.endroit) && values.serialNumber,
     },
-    gas_weight: {
+    gasWeight: {
       ...gas_weight,
       visibleWhen: (values: EquipmentFormValues) =>
-        gasEndroits.includes(values.endroit) && values.serial_number,
+        gasEndroits.includes(values.endroit) && values.serialNumber,
     },
-    has_leak_detection: {
+    hasLeakDetection: {
       ...has_leak_detection,
       visibleWhen: (values: EquipmentFormValues) =>
-        gasEndroits.includes(values.endroit) && values.serial_number,
+        gasEndroits.includes(values.endroit) && values.serialNumber,
     },
-    leak_detection_periodicity: {
+    leakDetectionPeriodicity: {
       ...leak_detection_periodicity,
       visibleWhen: (values: EquipmentFormValues) =>
-        gasEndroits.includes(values.endroit) && values.serial_number,
+        gasEndroits.includes(values.endroit) && values.serialNumber,
     },
-    installation_date,
-    nfc_tag: {
+    installationDate: { ...installation_date },
+    nfcTag: {
       label: 'Numero de NFC',
       initialValue: '',
       validationSchema: Yup.number()

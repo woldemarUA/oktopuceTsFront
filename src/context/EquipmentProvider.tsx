@@ -20,6 +20,9 @@ import {
   fetchIntTypes,
   addEquipment,
   fetchNfcs,
+  fetchProductTypes,
+  fetchEndroits,
+  fetchEqTypes,
 } from '../actions/equipmentsAPI';
 
 interface EquipmentContextTypes {
@@ -31,6 +34,9 @@ interface EquipmentContextTypes {
   nfcList: Option[];
   int_types: Option[];
   ext_types: Option[];
+  product_types: Record<string, any>[];
+  endroit_types: Record<string, any>;
+  equipment_types: Record<string, any>;
   error: Error | null;
   handleAddEquipment: (
     equipmentData: EquipmentInterface
@@ -46,6 +52,9 @@ const DefaultContextValue: EquipmentContextTypes = {
   int_types: [],
   ext_types: [],
   error: null,
+  product_types: [],
+  endroit_types: [],
+  equipment_types: [],
   nfcList: [],
   handleAddEquipment: async () => {
     return {
@@ -72,6 +81,11 @@ const EquipmentProvider = ({ children }: EquipmentProviderProps) => {
   const [equipment, setEquipment] = useState<EquipmentInterface | null>(null);
   const [equipmentBrands, setEquipmentBrands] = useState<Option[]>([]);
   const [equipmentLocations, setEquipmentLocations] = useState<Option[]>([]);
+  const [product_types, setProductTypes] = useState<Record<string, any>[]>([]);
+  const [endroit_types, setEndroitTypes] = useState<Record<string, any>[]>([]);
+  const [equipment_types, setEquipmentTypes] = useState<Record<string, any>[]>(
+    []
+  );
 
   const [nfcList, setNfcList] = useState<Option[]>([]);
   const [error, setError] = useState<Error | null>(null);
@@ -81,13 +95,21 @@ const EquipmentProvider = ({ children }: EquipmentProviderProps) => {
     equipmentData: EquipmentInterface
   ): Promise<{ msg: string }> => {
     try {
+      const gasType =
+        equipmentData.gasType && `/api/gas_types/${equipmentData.gasType}`;
+      const gasWeight =
+        equipmentData.gasWeight && parseInt(equipmentData.gasWeight, 10);
+      const location =
+        equipmentData.location && `/api/locations/${equipmentData.location}`;
       const equipmentPayload = {
         ...equipmentData,
+        location,
         site: `/api/sites/${equipmentData.site}`,
-        equipment_type: `/api/equipment_types/${equipmentData.equipment_type_id}`,
-        nfc_tag: `/api/nfc_tags/${equipmentData.nfc_tag}`,
-        gas_weight: parseInt(equipmentData.gas_weight || '0', 10),
-        equipment_brand: `/api/equipment_brands/${equipmentData.equipment_brand_id}`,
+        equipmentType: `/api/equipment_types/${equipmentData.equipmentType}`,
+        nfcTag: `/api/nfc_tags/${equipmentData.nfcTag}`,
+        gasType,
+        gasWeight,
+        equipmentBrand: `/api/equipment_brands/${equipmentData.equipmentBrand}`,
       };
 
       const serverResp = await addEquipment(equipmentPayload);
@@ -214,11 +236,33 @@ const EquipmentProvider = ({ children }: EquipmentProviderProps) => {
     }
   };
 
+  const getParametrage = async () => {
+    try {
+      const productData = await fetchProductTypes();
+      const eqTypesData = await fetchEqTypes();
+      const endroitData = await fetchEndroits();
+
+      setProductTypes(productData);
+      setEquipmentTypes(eqTypesData);
+      setEndroitTypes(endroitData);
+    } catch (error) {
+      console.error(error);
+      setError(
+        error instanceof Error
+          ? error
+          : new Error('Échec de la récupération des parametrage')
+      );
+    } finally {
+      setFetchFlag(false);
+    }
+  };
+
   useEffect(() => {
     getGasTypes();
     getExtTypes();
     getIntTypes();
     getNfcs();
+    getParametrage();
   }, [fetchFlag]);
 
   useEffect(() => {
@@ -245,6 +289,9 @@ const EquipmentProvider = ({ children }: EquipmentProviderProps) => {
         ext_types,
         error,
         nfcList,
+        product_types,
+        endroit_types,
+        equipment_types,
         handleAddEquipment,
       }}>
       {children}

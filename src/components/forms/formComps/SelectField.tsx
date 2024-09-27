@@ -44,7 +44,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
 
   useEffect(() => {
     Object.keys(eqTypeId).includes(values.endroit) &&
-      setFieldValue('equipment_type_id', eqTypeId[values.endroit]);
+      setFieldValue('equipmentType', eqTypeId[values.endroit]);
   }, [setFieldValue, values.endroit]);
 
   const onSelectChange = useCallback(
@@ -70,6 +70,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
     },
     [setFieldValue, options, name, handleAddOption]
   );
+  // console.log(values);
 
   return (
     <>
@@ -84,15 +85,16 @@ const SelectField: React.FC<SelectFieldProps> = ({
             label={label}
             options={options}
             onChange={onSelectChange}>
-            {options.map((option: Option) => {
-              return (
-                <option
-                  key={option.value}
-                  value={option.value}>
-                  {option.label}
-                </option>
-              );
-            })}
+            {options.length > 1 &&
+              options.map((option: Option) => {
+                return (
+                  <option
+                    key={option.value}
+                    value={option.value}>
+                    {option.label}
+                  </option>
+                );
+              })}
           </Field>
           <ErrorMessage
             name={name}

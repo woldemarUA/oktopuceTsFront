@@ -18,6 +18,9 @@ const BRANDS_API: string = import.meta.env.VITE_API_PATH + 'equipment_brands';
 const INT_TYPES_API: string = import.meta.env.VITE_API_PATH + 'int_types';
 const EXT_TYPES_API: string = import.meta.env.VITE_API_PATH + 'ext_types';
 const NFC_API: string = import.meta.env.VITE_API_PATH + 'nfc_tags';
+const PRODUCT_API = import.meta.env.VITE_API_PATH + 'equipment_products';
+const ENDROIT_API = import.meta.env.VITE_API_PATH + 'equipmment_endroit/all';
+const EQ_TYPES_API = import.meta.env.VITE_API_PATH + 'equipment_type/all';
 
 export const addEquipment = async (equipmentData: Record<string, any>) => {
   try {
@@ -156,6 +159,75 @@ export const fetchNfcs = async (): Promise<Option[]> => {
     if (axios.isAxiosError(err)) {
       throw new Error(
         `La récupération des nfcs a échoué avec le statut: ${err.response?.status}`
+      );
+    } else {
+      throw new Error('Une erreur inattendue est apparue');
+    }
+  }
+};
+
+export const fetchProductTypes = async (): Promise<Record<string, any>[]> => {
+  try {
+    const response = await axios.get<Record<string, any>[]>(`${PRODUCT_API}`);
+
+    return response.data;
+  } catch (err) {
+    console.error(err);
+    if (axios.isAxiosError(err)) {
+      throw new Error(
+        `La récupération des equipment locations a échoué avec le statut: ${err.response?.status}`
+      );
+    } else {
+      throw new Error('Une erreur inattendue est apparue');
+    }
+  }
+};
+
+export const fetchEndroits = async (): Promise<Record<string, any>[]> => {
+  try {
+    const response = await axios.get<Record<string, any>[]>(`${ENDROIT_API}`);
+
+    return response.data;
+  } catch (err) {
+    console.error(err);
+    if (axios.isAxiosError(err)) {
+      throw new Error(
+        `La récupération des equipment locations a échoué avec le statut: ${err.response?.status}`
+      );
+    } else {
+      throw new Error('Une erreur inattendue est apparue');
+    }
+  }
+};
+export const fetchEqTypes = async (): Promise<Record<string, any>[]> => {
+  try {
+    const response = await axios.get<Record<string, any>[]>(`${EQ_TYPES_API}`);
+
+    return response.data;
+  } catch (err) {
+    console.error(err);
+    if (axios.isAxiosError(err)) {
+      throw new Error(
+        `La récupération des equipment types a échoué avec le statut: ${err.response?.status}`
+      );
+    } else {
+      throw new Error('Une erreur inattendue est apparue');
+    }
+  }
+};
+
+export const fetchEndroitByProductId = async (): Promise<
+  Record<string, any>[]
+> => {
+  try {
+    const response = await axios.get(`${ENDROIT_API}`);
+
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    if (axios.isAxiosError(error)) {
+      throw new Error(
+        `La récupération des equipment type by product id a échoué avec le statut: ${error.response?.status}`
       );
     } else {
       throw new Error('Une erreur inattendue est apparue');

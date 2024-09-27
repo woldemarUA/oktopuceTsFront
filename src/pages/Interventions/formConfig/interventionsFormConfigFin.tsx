@@ -2,11 +2,13 @@ import * as Yup from 'yup';
 
 import { useSites } from '../../../context/SitesProvider';
 
-import {
-  equipment_type,
-  endroit,
-  equipment_type_id,
-} from '../../Equipments/equipmentConfigs/parametrageConfComp';
+// import {
+//   equipment_type,
+//   endroit,
+//   equipment_type_id,
+// } from '../../Equipments/equipmentConfigs/parametrageConfComp';
+
+import parametrageConfComp from '../../Equipments/equipmentConfigs/parametrageConfComp';
 
 import {
   misEnServiceOptions,
@@ -45,6 +47,8 @@ export interface InterventionFormInterface {
 
 const interventionsFormConfigFin = () => {
   const { sites } = useSites();
+
+  const { equipment_type, endroit, equipment_type_id } = parametrageConfComp();
 
   const sitesOptions = sites.map((site) => ({
     value: site.id,

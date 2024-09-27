@@ -60,7 +60,7 @@ const generateVisibleField = (
 export const checkEndroit = (valeurs: Record<string, any>): boolean => {
   let check = false;
   if (valeurs.endroit) {
-    const test = endroit_mapping.get(parseInt(valeurs.equipment_type));
+    const test = endroit_mapping.get(parseInt(valeurs.equipmentProduct));
 
     if (test) {
       const endroitVal = [];
@@ -102,7 +102,7 @@ const FormFin: React.FC<MyFormProps> = ({
   }, [formFieldConfig, valeurs, endroitCheck]);
 
   useEffect(() => {
-    if (valeurs.endroit && valeurs.equipment_type) {
+    if (valeurs.endroit && valeurs.equipmentProduct) {
       setEndroitCheck(checkEndroit(valeurs));
     }
   }, [valeurs]);

@@ -1,9 +1,12 @@
 import { useSites } from '../../../context/SitesProvider';
+import { useEquipments } from '../../../context/EquipmentProvider.tsx';
 
 import * as Yup from 'yup';
 import { EquipmentFormValues } from '../../../interface/equipment_interface.ts';
 
 import { checkEndroit } from '../../../components/forms/FormFin.tsx';
+
+import { convertOptions } from '../../../utilities/convertors.ts';
 
 // regulates equipment_type_id visiblity
 export const chaleurEauOptions = ['1', '2', '4', '8'];
@@ -46,7 +49,7 @@ export const endroit_mapping = new Map([
       { value: '', label: 'Select type' },
       { value: 6, label: 'Ballon (système monobloc)' },
       { value: 7, label: 'Ballon (système bi-bloc)' },
-      { value: 8, label: 'Unité extérieure (système bi-bloc)' },
+      // { value: 8, label: 'Unité extérieure (système bi-bloc)' },
     ],
   ],
 ]);
@@ -94,49 +97,11 @@ export const equipment_type_id_mapping = new Map([
   ],
 ]);
 
-export const equipment_type = {
-  label: 'Sur quel produit est installé la puce?',
-  initialValue: '',
-  validationSchema: Yup.number().required(' Type requis').integer(),
-  type: 'select', // Input type
-  options: [
-    { value: '', label: 'Choissisez' },
-    { value: 1, label: 'CLIMATISATION' },
-    { value: 2, label: 'POMPE A CHALEUR' },
-    { value: 3, label: 'CHAUFFE-EAU THERMODYNAMIQUE' },
-  ],
-};
-
-export const endroit = {
-  label: 'A quel endroit?',
-  initialValue: '',
-  validationSchema: Yup.number().required(' Type requis').integer(),
-  type: 'select', // Input type
-  options: (values: Record<string, any>) => {
-    return endroit_mapping.get(parseInt(values.equipment_type, 10));
-  },
-  visibleWhen: (values: EquipmentFormValues) => values.equipment_type,
-};
-
-export const equipment_type_id = {
-  label: "Type d'unite?",
-  initialValue: '',
-  validationSchema: Yup.number().required(' Type requis').integer(),
-  visibleWhen: (values: EquipmentFormValues) => {
-    return checkEndroit(values) && chaleurEauOptions.includes(values.endroit);
-    // return values.equipment_type && chaleurEauOptions.includes(values.endroit);
-  },
-  type: 'select', // Input type
-  options: (values: EquipmentFormValues) => {
-    return equipment_type_id_mapping.get(
-      `${values.equipment_type}${values.endroit}`
-    );
-  },
-  image: true,
-};
-
 function parametrageConfComp() {
   const { sites } = useSites();
+  const { product_types, endroit_types, equipment_types } = useEquipments();
+
+  const productOptions = convertOptions(product_types);
 
   const sitesOptions =
     sites.length > 0
@@ -160,9 +125,51 @@ function parametrageConfComp() {
         { value: 'add', label: 'Ajouter Site', from: 'Equipment', to: 'Site' },
       ],
     },
-    equipment_type,
-    endroit,
-    equipment_type_id,
+    equipmentProduct: {
+      label: 'Sur quel produit est installé la puce?',
+      initialValue: '',
+      validationSchema: Yup.number().required(' Type requis').integer(),
+      type: 'select', // Input type
+      options: [{ value: '', label: 'Choissisez' }, ...productOptions],
+    },
+    endroit: {
+      label: 'A quel endroit?',
+      initialValue: '',
+      validationSchema: Yup.number().required(' Type requis').integer(),
+      type: 'select', // Input type
+      options: (values: EquipmentFormValues) => {
+        const endroit_opt = values.equipmentProduct
+          ? [
+              { value: '', label: 'Choissisez' },
+              ...endroit_types[parseInt(values.equipmentProduct, 10)],
+            ]
+          : [{ value: '', label: 'Choissisez' }];
+        return [...endroit_opt];
+      },
+      visibleWhen: (values: EquipmentFormValues) => values.equipmentProduct,
+    },
+    equipmentType: {
+      label: "Type d'unite?",
+      initialValue: '',
+      validationSchema: Yup.number().required(' Type requis').integer(),
+      visibleWhen: (values: EquipmentFormValues) => {
+        return (
+          checkEndroit(values) && chaleurEauOptions.includes(values.endroit)
+        );
+        // return values.equipment_type && chaleurEauOptions.includes(values.endroit);
+      },
+      type: 'select', // Input type
+      options: (values: EquipmentFormValues) => {
+        const eq_opt = values.endroit
+          ? [
+              { value: '', label: 'Choissisez' },
+              ...equipment_types[parseInt(values.endroit, 10)],
+            ]
+          : [{ value: '', label: 'Choissisez' }];
+        return [...eq_opt];
+      },
+      image: true,
+    },
   };
 
   return formConf;
